@@ -1642,7 +1642,7 @@ def heldout_performance_bestchoice(path_to_data, path_to_results, n_depth, n_est
     # calculate performance metrics
     cm_dt4 = confusion_matrix(y_test, dtree_predictions)
     auc_measure = roc_auc_score(y_test, dtree_proba[:,1])
-    auprc = average_precision_score(y_test, dtree_proba[:,1],'micro')
+    auprc = average_precision_score(y_test, dtree_proba[:,1])
      
     precision_total, recall_total, f_measure_total, _ = precision_recall_fscore_support(y_test, dtree_predictions, average=None)
 
