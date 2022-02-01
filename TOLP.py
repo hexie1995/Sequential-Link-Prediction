@@ -1879,7 +1879,7 @@ def topol_stacking_temporal_with_edgelist(edges_orig, target_layer, predict_num,
     #### creat and save feature matrices #### 
     dir_output = './feature_metrices'+"/"+str(name) +"/" # output path
     if not os.path.isdir(dir_output):
-        os.mkdirs(dir_output)
+        os.makedirs(dir_output)
 
     creat_numpy_files_temporal(dir_output, df_ho, df_tr,predict_num)
     
@@ -2005,7 +2005,7 @@ def topol_stacking_temporal_with_adjmatrix(adj_orig, target_layer, predict_num,n
     #### creat and save feature matrices #### 
     dir_output = './feature_metrices'+"/"+str(name) +"/" # output path
     if not os.path.isdir(dir_output):
-        os.mkdirs(dir_output)
+        os.makedirs(dir_output)
 
     creat_numpy_files_temporal(dir_output, df_ho, df_tr,predict_num)
     
