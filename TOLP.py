@@ -1620,14 +1620,24 @@ def heldout_performance_bestchoice(path_to_data, path_to_results, n_depth, n_est
     y_test = np.load(path_to_data+'/y_Eunseen.npy')
     
     
+    
+
     col_mean = np.nanmean(X_train, axis=0)
-    inds = np.where(np.isnan(X_train))
-    X_train[inds] = np.take(col_mean, inds[1])
+    X_train = np.nan_to_num(X_train, nan=0, posinf=0, neginf=0)
+    #inds = np.where(np.isnan(X_train))
+    #X_train[inds] = np.take(col_mean, inds[1])
+    #print(X_train)
+    #X_train[X_train > 1e308] =  np.take(col_mean, inds[1])
+    #X_train[X_train < -1e308] =  np.take(col_mean, inds[1])
     
     col_mean = np.nanmean(X_test, axis=0)
-    inds = np.where(np.isnan(X_test))
-    X_test[inds] = np.take(col_mean, inds[1])
-     
+    X_test = np.nan_to_num(X_test, nan=0, posinf=0, neginf=0)
+    
+    #inds = np.where(np.isnan(X_test))
+    #X_test[inds] = np.take(col_mean, inds[1])
+    #print(X_test)
+    #X_test[X_test > 1e308] =  np.take(col_mean, inds[1])
+    #X_test[X_test < -1e308] =  np.take(col_mean, inds[1])
        
     # train the model
     dtree_model = RandomForestClassifier(n_estimators=n_est,max_depth=n_depth).fit(X_train, y_train)
@@ -1746,19 +1756,103 @@ def sample_true_false_edges_temporal(A_orig, A_train, predict_num, name):
     np.savetxt("./edge_tf_true/edge_t"+"_"+str(name)+".txt",edge_tt,fmt='%u')
     np.savetxt("./edge_tf_true/edge_f"+"_"+str(name)+".txt",edge_ff,fmt='%u')
 
+
+def sample_true_false_edges_partial(A, A_ho, A_tr, A_tr_new, predict_num,name):  
+    
+    """ 
+    
+    """
+    
+    Nsamples = 10000
+    nsim_id = 0
+    #np.random.seed(nsim_id)
+    num_sample_edges = math.ceil(Nsamples/(len(A_tr)-predict_num))-1
+    
+    
+    A_edge_t = []
+    A_edge_f = []
+    
+            
+    for i in range(predict_num, len(A_tr)):
+        A_diff = A_tr[i] - A_ho[i-predict_num]
+        nodes, edges = adj_to_nodes_edges(A_diff)
+        pos_edges = sparse.find(sparse.triu(A_tr[i],1)) # true candidates
+        A_neg = -1*A_tr[i] + 1
+        neg_edges = sparse.find(sparse.triu(A_neg,1)) # false candidates
+
+        temp_edge_t = [] # list of true edges (positive samples)
+        temp_edge_f = [] # list of false edges (negative samples)
+
+        for ll in range(num_sample_edges):
+            edge_t_idx_aux = np.random.randint(len(pos_edges[0]))
+            edge_f_idx_aux = np.random.randint(len(neg_edges[0]))
+            temp_edge_t.append((pos_edges[0][edge_t_idx_aux],pos_edges[1][edge_t_idx_aux]))
+            temp_edge_f.append((neg_edges[0][edge_f_idx_aux],neg_edges[1][edge_f_idx_aux]))
+        try:
+            os.mkdir("./edge_tf_tr/")
+        except:
+            print("")
+        #if not os.path.isdir("./edge_tf_tr/"):
+            #os.mkdir("./edge_tf_tr/")
+        np.savetxt("./edge_tf_tr/edge_t_{}".format(i)+"_"+str(name)+".txt",temp_edge_t,fmt='%u')
+        np.savetxt("./edge_tf_tr/edge_f_{}".format(i)+"_"+str(name)+".txt",temp_edge_f,fmt='%u')
+
+    A_diff = A_ho[-1] - A_tr_new[-1]
+    e_diff = sparse.find(sparse.triu(A_diff,1)) # true candidates
+    A_ho_aux = -1*A_ho[-1] + 1
+    ne_ho = sparse.find(sparse.triu(A_ho_aux,1)) # false candidates
+    Nsamples = 10000 # number of samples
+    edge_t = [] # list of true edges (positive samples)
+    edge_f = [] # list of false edges (negative samples)
+    train_final = []
+    
+    for ll in range(Nsamples):
+        edge_t_idx_aux = np.random.randint(len(e_diff[0]))
+        edge_f_idx_aux = np.random.randint(len(ne_ho[0]))
+        edge_t.append((e_diff[0][edge_t_idx_aux],e_diff[1][edge_t_idx_aux]))
+        edge_f.append((ne_ho[0][edge_f_idx_aux],ne_ho[1][edge_f_idx_aux]))
+    # store for later use
+    try:
+        os.mkdir("./edge_tf_tr/")
+    except:
+        print("")
+    #if not os.path.isdir("./edge_tf_tr/"):
+        #os.mkdir("./edge_tf_tr/")
+    np.savetxt("./edge_tf_tr/edge_t_final"+"_"+str(name)+".txt",edge_t,fmt='%u')
+    np.savetxt("./edge_tf_tr/edge_f_final"+"_"+str(name)+".txt",edge_f,fmt='%u')
+    
+    
+    A_diff = A - A_ho[-1]
+    e_diff = sparse.find(sparse.triu(A_diff,1)) # true candidates
+    A_orig_aux = -1*A + 1
+    ne_orig = sparse.find(sparse.triu(A_orig_aux,1)) # false candidates
+    Nsamples = 10000 # number of samples
+    edge_tt = [] # list of true edges (positive samples)
+    edge_ff = [] # list of false edges (negative samples)
+    
+    for ll in range(Nsamples):
+        edge_tt_idx_aux = np.random.randint(len(e_diff[0]))
+        edge_ff_idx_aux = np.random.randint(len(ne_orig[0]))
+        edge_tt.append((e_diff[0][edge_tt_idx_aux],e_diff[1][edge_tt_idx_aux]))
+        edge_ff.append((ne_orig[0][edge_ff_idx_aux],ne_orig[1][edge_ff_idx_aux]))
+    try:
+        os.mkdir("./edge_tf_true/")
+    except:
+        print("")
+    #if not os.path.isdir("./edge_tf_true/"):
+        #os.mkdir("./edge_tf_true/")
+    np.savetxt("./edge_tf_true/edge_t"+"_"+str(name)+".txt",edge_tt,fmt='%u')
+    np.savetxt("./edge_tf_true/edge_f"+"_"+str(name)+".txt",edge_ff,fmt='%u')        
+
+
 # #################
 
 
 ""
 def topol_stacking_temporal_with_edgelist(edges_orig, target_layer, predict_num,name): 
     
-    """
-    input: 
-    1. edges_orig: a list of edgelist from each of the layer before the target layer
-    2. target_layer: the layer we aim to predict
-    3. predict_num: number of layers wanted to use
-    4. name: name of the dataset
-    
+    """ 
+    Assuming we have no information at all for the target layer
     """
     
     row_tr = []
@@ -1877,16 +1971,16 @@ def topol_stacking_temporal_with_edgelist(edges_orig, target_layer, predict_num,
     feats = list(df_tr.columns)
     
     #### creat and save feature matrices #### 
-    dir_output = './feature_metrices'+"/"+str(name) +"/" # output path
-    if not os.path.isdir(dir_output):
-        os.makedirs(dir_output)
+    dir_output = "./feature_metrices"+"/"+str(name)  # output path
+    #if not os.path.isdir(dir_output):
+    #    os.mkdir(dir_output)
 
     creat_numpy_files_temporal(dir_output, df_ho, df_tr,predict_num)
     
     
     #### perform model selection #### 
-    path_to_data = './feature_metrices' +"/"+str(name)+"/"
-    path_to_results = './results'+"/"+str(name)+"/"
+    path_to_data = "./feature_metrices" +"/"+str(name)+"/"
+    path_to_results = "./results"+"/"+str(name)+"/"
 
     if not os.path.isdir(path_to_results):
         os.makedirs(path_to_results)
@@ -2027,6 +2121,192 @@ def topol_stacking_temporal_with_adjmatrix(adj_orig, target_layer, predict_num,n
     print("NAME IS ", name)
 
     return auprc, auc, precision, recall, featim, feats
+
+
+# +
+def topol_stacking_temporal_partial(edges_orig, target_layer, predict_num, name): 
+    
+    """ 
+    Assuming we have some information about the target layer
+    """
+    try:
+        os.mkdir("./feature_metrices/")
+    except:
+        print("")
+    try:
+        os.mkdir("./results/")
+    except:
+        print("")
+
+    
+    row_tr = []
+    col_tr = []
+    data_aux_tr = []
+    A_tr = []
+    
+    edge_t_tr = []
+    edge_f_tr = []
+    df_f_tr = [] 
+    df_t_tr = []
+    
+    
+    #### load target layer A
+    
+    mymax= mxx(edges_orig)
+    num_nodes = int(max( np.max(target_layer), mymax)) +1
+    row = np.array(target_layer)[:,0]
+    col = np.array(target_layer)[:,1]
+    data_aux = np.ones(len(row))
+    
+    A = csr_matrix((data_aux,(row,col)),shape=(num_nodes,num_nodes))
+    A = sparse.triu(A,1) + sparse.triu(A,1).transpose()
+    A[A>0] = 1 
+    A = A.todense()
+    
+
+    for i in range(len(edges_orig)):      
+        row_tr.append(np.array(edges_orig[i])[:,0])
+        col_tr.append(np.array(edges_orig[i])[:,1])
+        data_aux_tr.append(np.ones(len(row_tr[i])))
+        
+        A_tr.append(csr_matrix((data_aux_tr[i],(row_tr[i],col_tr[i])),shape=(num_nodes,num_nodes)))
+        A_tr[i] = sparse.triu(A_tr[i],1) + sparse.triu(A_tr[i],1).transpose()
+        A_tr[i][A_tr[i]>0] = 1 
+        A_tr[i] = A_tr[i].todense()        
+        
+    
+    #### construct the holdout and training matriced from the original matrix
+    alpha = 0.8 # sampling rate for holdout matrix
+    alpha_ = 0.8 # sampling rate for training matrix
+    
+    A_ho = []
+    A_tr_new = []
+    
+    
+    for i in range(predict_num, len(A_tr)):
+        A_hold, A_train = gen_tr_ho_networks(A_tr[i], alpha, alpha_)
+        A_ho.append(A_hold)
+        A_tr_new.append(A_train)
+        
+    ### here we are still missing the last training and testing label, we need to add the target layer
+    A_hold_, A_train_ = gen_tr_ho_networks(A, alpha, alpha_)    
+    A_tr_new.append(A_train_)
+    ### A_ho is the test sets, the label is. The last element of A_ho is the true label where we try to predict. 
+    A_ho.append(A_hold_)
+    
+    ### Now the training and hold out matrix list is complete, we try to create the corresponding edge lists for each.
+    sample_true_false_edges_partial(A, A_ho, A_tr, A_tr_new, predict_num,name)
+    
+    
+    for i in range(predict_num, len(A_tr)):
+        temp_true_edges = np.loadtxt("./edge_tf_tr/edge_t_{}".format(i)+"_"+str(name)+".txt").astype('int')
+        edge_t_tr.append(temp_true_edges)
+        
+        temp_false_edges = np.loadtxt("./edge_tf_tr/edge_f_{}".format(i)+"_"+str(name)+".txt").astype('int')       
+        edge_f_tr.append(temp_false_edges)
+        
+
+        A_tr_temp = A_tr[i-predict_num:i]
+        A_tr_temp.append(np.asmatrix(A_tr_new[i-predict_num]))
+
+        df_temp, time_temp = gen_topol_feats_temporal(A_tr[i], A_tr_temp, edge_f_tr[i-predict_num])
+        df_f_tr.append(df_temp)
+        df_temp, time_temp = gen_topol_feats_temporal(A_tr[i], A_tr_temp, edge_t_tr[i-predict_num])  
+        df_t_tr.append(df_temp)
+
+    
+   
+    edge_t_tr_final= np.loadtxt("./edge_tf_tr/edge_t_final"+"_"+str(name)+".txt").astype('int')
+    edge_f_tr_final = np.loadtxt("./edge_tf_tr/edge_f_final"+"_"+str(name)+".txt").astype('int')
+    A_tr_temp_ = A_tr[-(predict_num):]
+    A_tr_temp_.append(np.asmatrix(A_train_))
+    df_f_temp, time1 = gen_topol_feats_temporal(A_hold_, A_tr_temp_, edge_f_tr_final)
+    df_t_temp, time2 = gen_topol_feats_temporal(A_hold_, A_tr_temp_, edge_t_tr_final)
+
+    df_f_tr.append(df_f_temp)
+    df_t_tr.append(df_t_temp)
+    
+    
+    edge_t_ho= np.loadtxt("./edge_tf_true/edge_t"+"_"+str(name)+".txt").astype('int')
+    edge_f_ho= np.loadtxt("./edge_tf_true/edge_f"+"_"+str(name)+".txt").astype('int')
+    
+    A_tr_temp_ = A_tr[-(predict_num):]
+    A_tr_temp_.append(np.asmatrix(A_train_))
+    df_f_ho, time1 = gen_topol_feats_temporal(A, A_tr_temp_, edge_f_ho)
+    df_t_ho, time2 = gen_topol_feats_temporal(A, A_tr_temp_, edge_t_ho)
+    
+
+    
+    df_t_tr_columns = df_t_tr[0].columns
+    df_f_tr_columns = df_f_tr[0].columns    
+
+    v1 = df_t_tr[0].values
+    v2 = df_f_tr[0].values
+
+ 
+    #   return df_t_tr, df_f_tr, df_t_ho, df_f_ho  
+    df_t_tr_ = pd.DataFrame(data=v1, columns = df_t_tr_columns)
+    df_f_tr_ = pd.DataFrame(data=v2, columns = df_f_tr_columns)
+
+    column_name = list(df_t_tr_.columns)
+
+    for j in range(1,predict_num+2):  
+        for i in range (44*j, 44*(j+1)):
+            column_name[i] = column_name[i]+"_"+str(j)
+
+
+
+    df_t_tr_.columns = column_name
+    df_f_tr_.columns = column_name
+    df_t_ho.columns = column_name
+    df_f_ho.columns = column_name
+    
+    
+    feat_path = "./ef_gen_tr/"
+    try:
+        os.mkdir(feat_path)
+    except:
+        print("")
+
+    df_t_tr_.to_pickle(feat_path + 'df_t'+"_"+str(name))
+    df_f_tr_.to_pickle(feat_path + 'df_f'+"_"+str(name))
+
+    feat_path = "./ef_gen_ho/"
+    try:
+        os.mkdir(feat_path)
+    except:
+        print("")
+
+    df_t_ho.to_pickle(feat_path + 'df_t'+"_"+str(name))
+    df_f_ho.to_pickle(feat_path + 'df_f'+"_"+str(name))
+    
+    
+    df_tr = creat_full_set_temporal(df_t_tr_, df_f_tr_, predict_num)
+    df_ho = creat_full_set_temporal(df_t_ho, df_f_ho, predict_num)
+
+    dir_output = './feature_metrices' +"/"+str(name) # output path
+    
+    try:
+        os.mkdir(dir_output)
+    except:
+        print("")
+        
+    
+    creat_numpy_files_temporal( dir_output, df_ho, df_tr,predict_num)
+
+    path_to_data = './feature_metrices' +"/"+str(name)
+    path_to_results = './results'+"/"+str(name)
+    n_depths = [3, 6] # here is a sample search space
+    n_ests = [25, 50, 100] # here is a sample search space
+    
+    n_depth, n_est = model_selection(path_to_data, path_to_results, n_depths, n_ests)
+
+    auprc, auc, precision,recall, featim = heldout_performance_bestchoice(path_to_data, path_to_results, n_depth, n_est)
+    feats = list(df_tr.columns)
+    
+    return auprc, auc, precision,recall, featim, feats
+    
+
 
 
 
