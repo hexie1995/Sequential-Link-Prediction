@@ -1,4 +1,4 @@
-This is an algorithm developed for temporal network that is based on the previous algorithm introduced in:
-https://github.com/Aghasemian/OptimalLinkPrediction
-"Stacking Models for Nearly Optimal Link Prediction in Complex Networks", To appear, Proc. Natl. Acad. Sci. USA (2020)
-Amir Ghasemian, Homa Hosseinmardi, Aram Galstyan, Edoardo M. Airoldi and Aaron Clauset
+Use the commend 
+conda env create -f environment.yml
+to create the required environmnet for the code
+The example runs could be found in example.py, which runs through one of the 90 synthetic network datasets we created.
