@@ -1942,7 +1942,7 @@ def topol_stacking_temporal_with_edgelist(edges_orig, target_layer, predict_num,
         for i in range (44*j, 44*(j+1)):
             column_name[i] = column_name[i]+"_"+str(j)
     
-    print(column_name)
+    #print(column_name)
     
     df_t_tr_.columns = column_name
     df_f_tr_.columns = column_name
@@ -1970,10 +1970,16 @@ def topol_stacking_temporal_with_edgelist(edges_orig, target_layer, predict_num,
     
     feats = list(df_tr.columns)
     
+    
+    dir_output = "./feature_metrices" + "/"
+    if not os.path.isdir(dir_output):
+        os.mkdir(dir_output)
+    
     #### creat and save feature matrices #### 
-    dir_output = "./feature_metrices"+"/"+str(name)  # output path
-    #if not os.path.isdir(dir_output):
-    #    os.mkdir(dir_output)
+    dir_output = './feature_metrices'+"/"+str(name) +"/" # output path
+    if not os.path.isdir(dir_output):
+        os.mkdir(dir_output)
+
 
     creat_numpy_files_temporal(dir_output, df_ho, df_tr,predict_num)
     
@@ -2066,7 +2072,7 @@ def topol_stacking_temporal_with_adjmatrix(adj_orig, target_layer, predict_num,n
         for i in range (44*j, 44*(j+1)):
             column_name[i] = column_name[i]+"_"+str(j)
     
-    print(column_name)
+    #print(column_name)
     
     df_t_tr_.columns = column_name
     df_f_tr_.columns = column_name
@@ -2094,12 +2100,14 @@ def topol_stacking_temporal_with_adjmatrix(adj_orig, target_layer, predict_num,n
     
     feats = list(df_tr.columns)
     
-     
+    dir_output = "./feature_metrices" + "/"
+    if not os.path.isdir(dir_output):
+        os.mkdir(dir_output)
     
     #### creat and save feature matrices #### 
     dir_output = './feature_metrices'+"/"+str(name) +"/" # output path
     if not os.path.isdir(dir_output):
-        os.makedirs(dir_output)
+        os.mkdir(dir_output)
 
     creat_numpy_files_temporal(dir_output, df_ho, df_tr,predict_num)
     
@@ -2284,13 +2292,15 @@ def topol_stacking_temporal_partial(edges_orig, target_layer, predict_num, name)
     df_tr = creat_full_set_temporal(df_t_tr_, df_f_tr_, predict_num)
     df_ho = creat_full_set_temporal(df_t_ho, df_f_ho, predict_num)
 
-    dir_output = './feature_metrices' +"/"+str(name) # output path
-    
-    try:
+    dir_output = "./feature_metrices" + "/"
+    if not os.path.isdir(dir_output):
         os.mkdir(dir_output)
-    except:
-        print("")
-        
+    
+    #### creat and save feature matrices #### 
+    dir_output = './feature_metrices'+"/"+str(name) +"/" # output path
+    if not os.path.isdir(dir_output):
+        os.mkdir(dir_output)
+
     
     creat_numpy_files_temporal( dir_output, df_ho, df_tr,predict_num)
 
