@@ -11,6 +11,6 @@ This is the github repo accompany the paper:
 Sequential Stacking Link Prediction Algorithms for Temporal Networks
 Xie He, Amir Ghasemian, Eun Lee, Aaron Clauset, Peter Mucha
 
-which is currently under review at Nature Communications.
+which is currently under revision at Nature Communications.
 
 All copyright reserved. 
