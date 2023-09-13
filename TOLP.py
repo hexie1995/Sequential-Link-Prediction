@@ -1014,6 +1014,11 @@ def gen_topol_feats_temporal(A_orig, A_tr, edge_s):
     time_count.append(time_cost)
     df_feat = pd.concat([df_feat, temp], axis=1)
     
+    # the feature from the target layer is always attached at the end
+    # the way to ignore them or do not use them is through creat numpy files temporal
+    # adjust the number of features used in that function in order to cut down the last layer's information from leaking
+
+    
     
     return df_feat, time_count
 
@@ -1037,7 +1042,7 @@ def K_random_number_add_up_to_sum(k,summation):
     random.shuffle(output)
     return output
 
-def creat_full_set_temporal(df_t,df_f,predict_num):
+def creat_full_set_temporal(df_t,df_f,predict):
     
     """ 
     This reads dataframes created for positive and negative class, join them with their associated label.
@@ -1069,14 +1074,14 @@ def creat_full_set_temporal(df_t,df_f,predict_num):
     df_all.loc[df_all['diam_net'] == np.inf,'diam_net'] = 1e6
     
     # data cleaning
-    for i in range(1,predict_num+1):
+    for i in range(1,predict):
         df_all.loc[df_all['short_path_{}'.format(i)] == np.inf,'short_path_{}'.format(i)] = 1000*max(df_all.loc[~(df_all['short_path'] == np.inf),'short_path'],default=0)
         df_all.loc[df_all['diam_net_{}'.format(i)] == np.inf,'diam_net_{}'.format(i)] = 1e6
      
     return df_all
 
 
-def creat_numpy_files_temporal(dir_results, df_ho, df_tr, predict_num):
+def creat_numpy_files_temporal(dir_results, df_ho, df_tr, predict):
     
     """ 
     This functiion multiplied the column number and attache verything that is important in the function
@@ -1095,13 +1100,13 @@ def creat_numpy_files_temporal(dir_results, df_ho, df_tr, predict_num):
     #'page_rank_pers_edges', removed
     
     
-    full_feat_set = [None] * ((predict_num)*len(feature_set))
+    full_feat_set = [None] * ((predict)*len(feature_set))
     len_of_feat = len(feature_set)
     
     for k in range(len_of_feat):
         full_feat_set[k] = feature_set[k]
     
-    for j in range(1,predict_num):  
+    for j in range(1,predict):  
         for i in range (len_of_feat*j, len_of_feat*(j+1)):
             full_feat_set[i] = feature_set[i-len_of_feat*j]+"_"+str(j)
         
@@ -1942,7 +1947,11 @@ def topol_stacking_temporal_with_edgelist(edges_orig, target_layer, predict_num,
         for i in range (44*j, 44*(j+1)):
             column_name[i] = column_name[i]+"_"+str(j)
     
+    
+    #print(df_t_tr_.columns)
+    #print(len(df_t_tr_.columns))
     #print(column_name)
+    #print(len(column_name))
     
     df_t_tr_.columns = column_name
     df_f_tr_.columns = column_name
@@ -2095,8 +2104,8 @@ def topol_stacking_temporal_with_adjmatrix(adj_orig, target_layer, predict_num,n
     #return df_t_tr_,df_f_tr_,df_t_ho,df_f_ho
     
     #### load dataframes for train and holdout sets ####
-    df_tr = creat_full_set_temporal(df_t_tr_,df_f_tr_,predict_num)
-    df_ho = creat_full_set_temporal(df_t_ho,df_f_ho,predict_num)
+    df_tr = creat_full_set_temporal(df_t_tr_,df_f_tr_,predict_num+1)
+    df_ho = creat_full_set_temporal(df_t_ho,df_f_ho,predict_num+1)
     
     feats = list(df_tr.columns)
     
@@ -2109,6 +2118,8 @@ def topol_stacking_temporal_with_adjmatrix(adj_orig, target_layer, predict_num,n
     if not os.path.isdir(dir_output):
         os.mkdir(dir_output)
 
+    # here we are not plusing anything at all because essentially this is just using the previous layers
+    # even though the last layer's feature names are defined, we are not using them. 
     creat_numpy_files_temporal(dir_output, df_ho, df_tr,predict_num)
     
     
@@ -2129,6 +2140,7 @@ def topol_stacking_temporal_with_adjmatrix(adj_orig, target_layer, predict_num,n
     print("NAME IS ", name)
 
     return auprc, auc, precision, recall, featim, feats
+
 
 
 # +
@@ -2215,8 +2227,15 @@ def topol_stacking_temporal_partial(edges_orig, target_layer, predict_num, name)
         
 
         A_tr_temp = A_tr[i-predict_num:i]
+        # this is where the originally matrix is added, and thus why there is predict_num +2 features
+        # however, we are always ignoring the last layer of feature, because essentially that's the true feature of the last layer
+        # and we just do not use that information, which is why the creat_numpy_file_temporal is only predict_num+1, not +2
+        # and thus we have the original information attached
+        # and for the completely missing case, creat_numpy_file_temporal does not have to +1 because we are ignoring the last layer
+        # #################################################################
         A_tr_temp.append(np.asmatrix(A_tr_new[i-predict_num]))
-
+        ###########DIFFERENCE###################
+        ###################################################################
         df_temp, time_temp = gen_topol_feats_temporal(A_tr[i], A_tr_temp, edge_f_tr[i-predict_num])
         df_f_tr.append(df_temp)
         df_temp, time_temp = gen_topol_feats_temporal(A_tr[i], A_tr_temp, edge_t_tr[i-predict_num])  
@@ -2258,11 +2277,17 @@ def topol_stacking_temporal_partial(edges_orig, target_layer, predict_num, name)
 
     column_name = list(df_t_tr_.columns)
 
+    # here we plus two because we need to plus 2 to include the feat names of the original layer
+    # but in fact we do not use them.
     for j in range(1,predict_num+2):  
         for i in range (44*j, 44*(j+1)):
             column_name[i] = column_name[i]+"_"+str(j)
 
-
+    #print(df_t_tr_.columns)
+    #print(len(df_t_tr_.columns))
+    #print(column_name)
+    #print(len(column_name))
+    
 
     df_t_tr_.columns = column_name
     df_f_tr_.columns = column_name
@@ -2289,8 +2314,8 @@ def topol_stacking_temporal_partial(edges_orig, target_layer, predict_num, name)
     df_f_ho.to_pickle(feat_path + 'df_f'+"_"+str(name))
     
     
-    df_tr = creat_full_set_temporal(df_t_tr_, df_f_tr_, predict_num)
-    df_ho = creat_full_set_temporal(df_t_ho, df_f_ho, predict_num)
+    df_tr = creat_full_set_temporal(df_t_tr_, df_f_tr_, predict_num+2)
+    df_ho = creat_full_set_temporal(df_t_ho, df_f_ho, predict_num+2)
 
     dir_output = "./feature_metrices" + "/"
     if not os.path.isdir(dir_output):
@@ -2301,8 +2326,9 @@ def topol_stacking_temporal_partial(edges_orig, target_layer, predict_num, name)
     if not os.path.isdir(dir_output):
         os.mkdir(dir_output)
 
-    
-    creat_numpy_files_temporal( dir_output, df_ho, df_tr,predict_num)
+    # here we only +1 , because we are ignoring the last layer of information. which is just the original matrix.
+    # the plus one is plusing towards the length of the feature vectors. 
+    creat_numpy_files_temporal(dir_output, df_ho, df_tr,predict_num+1)
 
     path_to_data = './feature_metrices' +"/"+str(name)
     path_to_results = './results'+"/"+str(name)
