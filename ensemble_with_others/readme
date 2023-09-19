@@ -1,0 +1,3 @@
+This folder contains all the necessary codes to completely run the entire Ensemble-Sequential-Stacking method from the paper.
+Note very importantly that Tensorial-SBM and E-LTSM-D are modified from their original github, in order to save the output features from their code to be able to used for the Ensemble learning method.
+All copy rights are reserved to the original Github and this is only intended as a tutorial for installing the Ensemble-Sequential-Stacking Method. 
