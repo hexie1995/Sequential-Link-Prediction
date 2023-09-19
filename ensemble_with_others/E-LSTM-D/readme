@@ -1,0 +1,9 @@
+This is the code modified and used for ensemble learning from :https://github.com/jianz94/e-lstm-d 
+See their original Github for the full instructions and please cite them (and of course us if used for ensemble learning) if used:
+
+@article{chen2019lstm,
+  title={E-LSTM-D: A Deep Learning Framework for Dynamic Network Link Prediction},
+  author={Chen, Jinyin and Zhang, Jian and Xu, Xuanheng and Fu, Chengbo and Zhang, Dan and Zhang, Qingpeng and Xuan, Qi},
+  journal={arXiv preprint arXiv:1902.08329},
+  year={2019}
+}
