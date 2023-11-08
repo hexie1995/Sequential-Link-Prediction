@@ -1,3 +1,14 @@
+### Sequential Stacking Link Prediction Algorithms for Temporal Networks 
+
+This is the github repo accompany the paper by Xie He, Amir Ghasemian, Eun Lee, Aaron Clauset, Peter Mucha. 
+The paper is currently under revision at Nature Communications.
+
+All copyright reserved. 
+
+**Please cite the paper when using the data or code.**
+
+### System requirements
+
 Use the commend
 
 ```bash
@@ -5,12 +16,6 @@ conda env create -f environment.yml
 ```
 
 to create the required environmnet for the code
-
-The example runs could be found in example.py, which runs through one of the 90 synthetic network datasets we created.
-
-To run through the synthetic networks, please download them through the Google Drive Link here: 
-
-https://drive.google.com/drive/folders/1sfycenFPrYXBHSUlJ7ovEIYHFY5-mGg2?usp=drive_link
 
 To reproduce our experiments, you will need at least Python 3.7 and a few packages installed. You can check your python version with
 
@@ -20,13 +25,6 @@ $ python --version
 and install the necessary packages with
 ```bash
 $ python -m pip install numpy scipy pandas tqdm matplotlib networkx
-```
-
-You will also need a local copy of our code either cloned from GitHub or downloaded from a Zenodo archive. To install our package from your local copy of the code, change to the code directory and use pip.
-
-```bash
-$ cd uclasm
-$ python -m pip install .
 ```
 
 ### To run only the Top-Sequential Experiments
@@ -104,13 +102,3 @@ The following is given to us by the authors, special thanks to the authors for s
 ### Previous Mistakes
 
 You could also find the past bugged version of the code both in the same folder and on Github for debugging purposes. The noticable change could be found in the Github history.
-
-### Citation
-
-This is the github repo accompany the paper: 
-Sequential Stacking Link Prediction Algorithms for Temporal Networks
-Xie He, Amir Ghasemian, Eun Lee, Aaron Clauset, Peter Mucha
-
-which is currently under revision at Nature Communications.
-
-All copyright reserved. 
