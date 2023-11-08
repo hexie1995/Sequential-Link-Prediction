@@ -1,14 +1,62 @@
 Use the commend
 
-##
-conda env create -f environment.yml 
-##
+```bash
+conda env create -f environment.yml
+```
 
 to create the required environmnet for the code
 
 The example runs could be found in example.py, which runs through one of the 90 synthetic network datasets we created.
 
-To run through the synthetic networks, please download them through the Google Drive Link here: https://drive.google.com/drive/folders/1sfycenFPrYXBHSUlJ7ovEIYHFY5-mGg2?usp=drive_link
+To run through the synthetic networks, please download them through the Google Drive Link here: 
+
+https://drive.google.com/drive/folders/1sfycenFPrYXBHSUlJ7ovEIYHFY5-mGg2?usp=drive_link
+
+To reproduce our experiments, you will need at least Python 3.7 and a few packages installed. You can check your python version with
+
+```bash
+$ python --version
+```
+and install the necessary packages with
+```bash
+$ python -m pip install numpy scipy pandas tqdm matplotlib networkx
+```
+
+You will also need a local copy of our code either cloned from GitHub or downloaded from a Zenodo archive. To install our package from your local copy of the code, change to the code directory and use pip.
+
+```bash
+$ cd uclasm
+$ python -m pip install .
+```
+
+### Erdős–Rényi Experiments
+
+Running the experiments will take a while depending on your hardware.
+
+```bash
+$ cd experiments
+$ python run_erdos_renyi.py
+$ python plot_erdos_renyi.py
+```
+Change the variables in run_erdos_renyi.py to run with different settings i.e. number of layers and whether isomorphism counting is being done.
+
+plot_erdos_renyi.py will generate a figure called `n_iter_vs_n_world_nodes_3_layers_500_trials_iso_count.pdf` which corresponds to figure 7 in the paper. Other figures related to time and number of isomorphisms will also be generated.
+
+### Sudoku Experiments
+
+Running the experiments will take a while depending on your hardware.
+
+```bash
+$ cd experiments
+$ python run_sudoku.py
+$ python plot_sudoku_times.py
+```
+
+plot_sudoku_times.py will generate a figure called `test_sudoku_scatter_all_log.pdf` which corresponds to figure 6 in the paper. Other figures for each individual dataset will also be generated.
+
+
+
+
 
 The real world networks could be found under the following links, due to copy right reasons, we will only show the link to download them:
 The following is taken from ICON: https://icon.colorado.edu/#!/networks
