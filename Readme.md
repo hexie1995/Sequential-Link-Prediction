@@ -29,7 +29,7 @@ $ cd uclasm
 $ python -m pip install .
 ```
 
-### Erdős–Rényi Experiments
+### To run only the Top-Sequential Experiments
 
 Running the experiments will take a while depending on your hardware.
 
@@ -42,22 +42,8 @@ Change the variables in run_erdos_renyi.py to run with different settings i.e. n
 
 plot_erdos_renyi.py will generate a figure called `n_iter_vs_n_world_nodes_3_layers_500_trials_iso_count.pdf` which corresponds to figure 7 in the paper. Other figures related to time and number of isomorphisms will also be generated.
 
-### Sudoku Experiments
+### Real World Datasets
 
-Running the experiments will take a while depending on your hardware.
-
-```bash
-$ cd experiments
-$ python run_sudoku.py
-$ python plot_sudoku_times.py
-```
-
-plot_sudoku_times.py will generate a figure called `test_sudoku_scatter_all_log.pdf` which corresponds to figure 6 in the paper. Other figures for each individual dataset will also be generated.
-
-
-
-
-## Real World Datasets
 The real world networks could be found under the following links, due to copy right reasons, we will only show the link to download them:
 The following is taken from ICON: https://icon.colorado.edu/#!/networks
 
@@ -80,10 +66,12 @@ The following is given to us by the authors, special thanks to the authors for s
 - Khalique Newaz and Tijana Milenkovic (2020), Improving inference of the dynamic biological network underlying aging via network propagation, IEEE/ACM Transactions on Computational Biology and Bioinformatics, DOI: 10.1109/TCBB.2020.3022767.
 
 
-##
+### Previous Mistakes
+
 You could also find the past bugged version of the code both in the same folder and on Github for debugging purposes. The noticable change could be found in the Github history.
 
-##
+### Citation
+
 This is the github repo accompany the paper: 
 Sequential Stacking Link Prediction Algorithms for Temporal Networks
 Xie He, Amir Ghasemian, Eun Lee, Aaron Clauset, Peter Mucha
