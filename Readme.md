@@ -69,6 +69,14 @@ Change the variables in run_erdos_renyi.py to run with different settings i.e. n
 plot_erdos_renyi.py will generate a figure called `n_iter_vs_n_world_nodes_3_layers_500_trials_iso_count.pdf` which corresponds to figure 7 in the paper. Other figures related to time and number of isomorphisms will also be generated.
 
 
+### Synthetic Datasets
+
+The example runs could be found in example.py, which runs through one of the 90 synthetic network datasets we created.
+To run through the synthetic networks, please download them through the Google Drive Link here: 
+
+https://drive.google.com/drive/folders/1sfycenFPrYXBHSUlJ7ovEIYHFY5-mGg2?usp=drive_link
+
+
 ### Real World Datasets
 
 The real world networks could be found under the following links, due to copy right reasons, we will only show the link to download them:
