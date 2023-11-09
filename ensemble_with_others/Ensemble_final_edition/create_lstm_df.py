@@ -164,7 +164,7 @@ def generate_lstm_df(name):
 
 
 
-    feat_path = "./final2_all_features/"
+    feat_path = "./finalized_all_features/"
     df_t_tr.to_pickle(feat_path + 'df_t_tr'+"_"+str(name))
     df_f_tr.to_pickle(feat_path + 'df_f_tr'+"_"+str(name))
     df_t_ho.to_pickle(feat_path + 'df_t_ho'+"_"+str(name))
