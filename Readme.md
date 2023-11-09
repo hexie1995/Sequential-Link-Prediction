@@ -19,8 +19,15 @@ Note very importantly, currently because of the GNU and GCC packages that are de
 If you wish to run only the Top-Sequential method with the topological features, you could instead do:
 
 ```bash
-pip install scipy numpy pandas networkx scikit-learn 
+pip install scipy numpy pandas networkx scikit-learn imblearn
 ```
+
+If you further with to run only Top-Sequential and Time Series, then you should also install:
+
+```bash
+pip install statsmodels
+```
+
 
 This has been tested on all the popular platforms and should work for Windows, Mac OS, Linux, Google Colab, etc.
 
@@ -73,7 +80,7 @@ Then, you have to run the Time-Series codes in order to get the features from th
 
 ```bash
 $ cd ensemble_with_others/Time-Series
-$ python run_time_series_real.py
+$ python run_time_series.py
 ```
 
 After that, navigate towards the folder `ensemble_with_others/Ensemble_final_edition/`.
