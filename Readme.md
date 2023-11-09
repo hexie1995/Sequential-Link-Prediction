@@ -13,7 +13,7 @@ Use the commend
 conda env create -f environment.yml
 ```
 
-to create the required environmnet for the code (Only if you want to use the full Ensemble-Sequential, because of the dependency of E-LSTM-D, Time Series, and T-SBM).
+to create the required environmnet for the code (**Only if you want to use the full Ensemble-Sequential**, because of the dependency of E-LSTM-D, Time Series, and T-SBM).
 Note very importantly, currently because of the GNU and GCC packages that are dependencies required from E-LSTM-D, it is only possible to do the full Ensemble-Sequential on Linux system.
 
 If you wish to run only the Top-Sequential method with the topological features, you could instead do:
