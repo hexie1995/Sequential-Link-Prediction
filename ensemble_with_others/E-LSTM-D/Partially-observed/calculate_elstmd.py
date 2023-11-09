@@ -8,8 +8,7 @@ import tensorflow.keras.backend as K
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ['CUDA_VISIBLE_DEVICES'] = "0"
 
-path = r"/home/xhe/real_data//"
-#path = r"C:\Users\hexie\OneDrive\Desktop\Projects\TOLP-DESKTOP\tolp_data\real_data\\"
+path = r"/../../../community_label_TSBM//"
 fakelist1 = []
 fakelist2 = []
 f1 = ["1","2","3"]
