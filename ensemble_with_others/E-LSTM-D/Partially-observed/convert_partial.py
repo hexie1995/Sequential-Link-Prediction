@@ -124,7 +124,7 @@ def convert_to_npy(name):
     return num_nodes
     
 data_name = "fake110"
-convert_to_npy(path+data_name)
+convert_to_npy(data_name)
 #node_count = []
 #for item in data_list:
 #    node_count.append(convert_to_npy(item))
