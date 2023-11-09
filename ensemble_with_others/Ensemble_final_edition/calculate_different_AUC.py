@@ -8,7 +8,7 @@ import pandas as pd
 import warnings
 import pickle
 
-path = r"/home2/xhe/new_fake/new_fake1//"
+path = r"../../community_label_TSBM//"
 
 warnings.filterwarnings("ignore")
 
@@ -264,8 +264,9 @@ def AUC_wrapper(name):
 
 
 
-with Pool(len(data_list)) as p:
-    print(p.map(AUC_wrapper, data_list))
+#with Pool(len(data_list)) as p:
+#    print(p.map(AUC_wrapper, data_list))
 
 
-#AUC_wrapper(fakelist[0])
+data_name = "fake110"
+run_data(data_name)
