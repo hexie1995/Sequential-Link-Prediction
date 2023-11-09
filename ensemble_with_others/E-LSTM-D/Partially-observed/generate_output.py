@@ -2,7 +2,7 @@ import os
 from multiprocessing import Pool
 import numpy as np
 
-path = r"/../../../community_label_TSBM//"
+path = r"/../../community_label_TSBM//"
 
 fakelist1 = []
 fakelist2 = []
