@@ -66,7 +66,7 @@ def save_feat_matrix(name):
     
 data_name = "fake110"   
 
-save_feat_matrix(path+data_name)
+save_feat_matrix(data_name)
 
 #with Pool(len(data_list)) as p:
 #    print(p.map(save_feat_matrix, data_list))
