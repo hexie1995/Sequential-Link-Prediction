@@ -46,5 +46,5 @@ def partially_observed_data(name):
     return auc
 
 
-# replace `name` with your desired dataset, e.g. fake111. 
-partially_observed_data(name)
+# replace `data_name` with your desired dataset, e.g. fake111. 
+partially_observed_data(data_name)
