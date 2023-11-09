@@ -1,11 +1,9 @@
 ### Sequential Stacking Link Prediction Algorithms for Temporal Networks 
 
 This is the github repo accompany the [paper by Xie He, Amir Ghasemian, Eun Lee, Aaron Clauset, Peter Mucha](https://www.researchsquare.com/article/rs-2535525/v1). 
-The paper is currently under revision at Nature Communications.
+The paper is currently under revision at Nature Communications. 
 
-All copyright reserved. 
-
-**Please cite the paper when using the data or code.**
+**Please cite the paper when using the data or code. See License Information for more details on Usage.**
 
 ### System requirements
 
@@ -15,7 +13,14 @@ Use the commend
 conda env create -f environment.yml
 ```
 
-to create the required environmnet for the code.
+to create the required environmnet for the code (Only if you want to use the full Ensemble-Sequential ).
+
+If you wish to run only the Top-Sequential method with the topological features, you could instead do:
+
+```bash
+conda env create -f environment-tolp.yml
+```
+
 To reproduce our experiments, you will need at least Python 3.10 and a few packages installed(see the enviornment file for specific details). 
 
 You can check your python version with
