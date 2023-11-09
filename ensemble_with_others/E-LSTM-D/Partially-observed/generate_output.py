@@ -27,6 +27,9 @@ data_list = ["chess","obrazil","bionet1", "bitcoin","emaildnc","bionet2",
 
 
 def save_feat_matrix(name):
+    if not os.path.isdir("./lstm_feat/"):
+	    os.mkdir("./lstm_feat/")
+    
     trainX = np.load("./matrix//"  +  name +"_train.npy")
     testX = np.load("./matrix//"  +  name +"_test.npy")     
     weights = np.load("./weights//"  +  name +".npy",allow_pickle=True)
