@@ -3,7 +3,7 @@ import numpy as np
 from TOLPTS import *
 from multiprocessing import Pool
 
-path = r"/home2/xhe/fake2//"
+path = r"../../community_label_TSBM//"
 fakelist1 = []
 fakelist2 = []
 f1 = ["1","2","3"]
@@ -67,9 +67,9 @@ def run_ts(name):
     np.save("time_series_results/REC_"+(name)+".npy",REC)
     np.save("time_series_results/CM_"+(name)+".npy",CM)
 
-with Pool(len(fakelist)) as p:
-    print(p.map(run_ts, fakelist))
+#with Pool(len(fakelist)) as p:
+#    print(p.map(run_ts, fakelist))
 
-#run_ts(fakelist[0])
-
+data_name = "fake110"
+run_ts(data_name)
 
