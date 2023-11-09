@@ -59,7 +59,7 @@ To run the full Ensemble-Sequential experiment. You have to first:
 First, you have to run the E-LSTM-D codes in order to get the features and AUC scores from it. 
 
 ```bash
-$ cd ensemble_with_others/E-LSTM-D/Completely-unobserved
+$ cd ensemble_with_others/E-LSTM-D/Partially-observed
 $ python convert_partial.py
 $ python generate_output.py
 $ python calculate_elstmd.py
@@ -78,11 +78,11 @@ Once inside the folder you have to first generate the feature matrix for the dat
 
 ```bash
 $ python create_lstm_df.py # this will create the LSTM features
-$ python real_data_runner.py # this will create the T-SBM features (which would be an edge indicator) and the Toplogical features
+$ python data_runner.py # this will create the T-SBM features (which would be an edge indicator) and the Toplogical features
 $ python process_ts.py # this will create the time series features and add them to the end of the previous features. 
 ```
 
-If done correctly, you should be seeing folders named "lstm_feature", "for_sbm", "all_features", "edge_tf_true", "edge_tf_tr", "ef_gen_tr", "ef_gen_tr". 
+If done correctly, you should be seeing folders named "lstm_feature", "for_sbm", "feature_metrices", "results", "all_features", "edge_tf_true", "edge_tf_tr", "ef_gen_tr", "ef_gen_tr". 
 Note: you might encounter folder not found error, in which case you should check the folder name in the code and make sure to change that manually. 
 TODO: fix this so that it could be done automatically. 
 
@@ -92,7 +92,7 @@ Then you could go ahead and call:
 $ python calculate_different_AUC.py 
 ```
 
-This will give you the complete AUC scores result of the dataset you desired. 
+This will give you the complete AUC scores result of the dataset you desired. Please change the `feat_path` in the code to your desired output path.
 
 Very importantly, the AUC scores order that you will end up getting after the partially observed case should be: 
 ```
@@ -100,6 +100,28 @@ auc_methods = ['Top-Sequential-Stacking', 'Time-Series', 'Tensorial-SBM', 'E-LST
 ```
 and the AUC scores order that you will get after the completely unobserved case will be the same order, except that you will ignore the third column, `Tensorial-SBM`, because that would be a meaningless result that is repeating the partially observed case.  
 Note also: feel free to use this ensemble learning method stacked with other features of your liking. Theoritically any features that could generated with a partially observed network would work with that case, and note also completely unobserved case would require features that could be generated from the previous time slot. 
+
+
+Note also that if you do not wish the run the full E-LSTM-D and Time Series, but are only interested in the toplogical feature + T-SBM, you could simply navigate to the folder, and run:
+
+```
+$ python data_runner.py 
+```
+
+This will give you all the feature matrix you need to further use your preferred algorithm. This gives you: 
+"for_sbm", "feature_metrices", "results", "edge_tf_true", "edge_tf_tr", "ef_gen_tr", "ef_gen_tr". 
+
+And you could then call 
+
+```
+$ python calculate_different_AUC.py 
+```
+
+You could get both the Top-Sequential AUC and the T-SBM AUC without the trouble of installing E-LSTM-D. 
+Namely, the choice `0` gives you Top-Sequential AUC, choice `1` gives you Time-Series, choice `2` gives you T-SBM, choices `3` gives you E-LSTM-D, and choice `4` gives you Ensemble-Sequential-Stacking, just like what is described above. 
+But you need to change the variable `feat_path` to your own feature path before proceed if you have **not** run the other two. If you have run the other two in the order described above, you are good to go. 
+And in the case you have **not** run neither Time-Series nor E-LSTM-D, you have to only the choice of `0` and `2`. Any other option will likely give you an error message. This part has been tested on Linux and Windows and Mac. 
+If there's any question, feel free to leave a message on Github or email directly. 
 
 
 ### To run the benchmarking methods mentioned in the paper individually
