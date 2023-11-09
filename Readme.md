@@ -14,7 +14,6 @@ conda env create -f environment.yml
 ```
 
 to create the required environmnet for the code (**Only if you want to use the full Ensemble-Sequential**, because of the dependency of E-LSTM-D, Time Series, and T-SBM).
-Note very importantly, currently because of the GNU and GCC packages that are dependencies required from E-LSTM-D, it is only possible to do the full Ensemble-Sequential on Linux system.
 
 If you wish to run only the Top-Sequential method with the topological features, you could instead do:
 
@@ -70,10 +69,17 @@ First, you have to run the E-LSTM-D codes in order to get the features and AUC s
 ```bash
 $ cd ensemble_with_others/E-LSTM-D/Partially-observed
 $ python convert_partial.py
-$ python generate_output.py
 $ python calculate_elstmd.py
+$ python generate_output.py
 ```
 this will in turn gives you a full feature matrix from E-LSTM-D, which you could used to stack with the topological features extracted with Top-Sequential method. 
+
+If you run into trouble installing from the E-LSTM-D Github or just simply wish to install packages by your self, try the following versions of the pakcages:
+
+E-LSTM-D: python 3.6.15, numpy 1.14.5, scipy 1.4.0, tensorflow 1.14.0, keras 2.2.4, scikit-learn 0.19.0, networkx 2.5.1, pandas 1.0.5. 
+
+This should at least works for the E-LSTM-D folder and will in turn gives you the folder named "lstm_feat" if everything is run successfully. 
+
 
 Then, you have to run the Time-Series codes in order to get the features from them. 
 
