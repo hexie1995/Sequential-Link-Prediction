@@ -27,50 +27,73 @@ $ python --version
 ### To run only the Top-Sequential Experiments
 
 Running the experiments will take a while depending on your hardware.
-The best way to run only the Top-Sequential Experiment is to follow the $example.py$ file. 
+The best way to run only the Top-Sequential Experiment is to follow the `example.py` file. 
 
 ```bash
-$ cd experiments
-$ python run_erdos_renyi.py
-$ python plot_erdos_renyi.py
+$ python example.py
 ```
-Change the variables in run_erdos_renyi.py to run with different settings i.e. number of layers and whether isomorphism counting is being done.
+Change the variables and/or numbers in `example.py` to change the corresponding variables in the paper. 
+Note that you have to manually determine the number of layers you want the algorithm to work with. 
+The search variable **u** could be found and replaced in `edges_orig = edges_orig[0:u]` (6 in all of our experiment)
+The flow variable **q** could be found and replaced in `predict_num = q` (3 in all of our experiment)
 
-plot_erdos_renyi.py will generate a figure called `n_iter_vs_n_world_nodes_3_layers_500_trials_iso_count.pdf` which corresponds to figure 7 in the paper. Other figures related to time and number of isomorphisms will also be generated.
+Running `example.py` (which contain two functions) will generate two AUC scores, accordingly with the partially observed case and the completely unobserved case in the paper. 
 
 ### To run the full Ensemble-Sequential Experiments
 
-Running the experiments will take a while depending on your hardware.
+To run the full Ensemble-Sequential experiment. You have to first:
+
+1. Download and install the code and relevant packages from: [E-LSTM-D](https://github.com/jianz94/e-lstm-d)
+2. Download and install the code and relevant packages from: [T-SBM](https://github.com/seeslab/MMmultilayer)
+3. Make sure you have installed the required environment using the `environment.yml`
+
+First, you have to run the E-LSTM-D codes in order to get the features and AUC scores from it. 
 
 ```bash
-$ cd experiments
-$ python run_erdos_renyi.py
-$ python plot_erdos_renyi.py
+$ cd ensemble_with_others/E-LSTM-D/Completely-unobserved
+$ python convert_partial.py
+$ python generate_output.py
+$ python calculate_elstmd.py
 ```
-Change the variables in run_erdos_renyi.py to run with different settings i.e. number of layers and whether isomorphism counting is being done.
+this will in turn gives you a full feature matrix from E-LSTM-D, which you could used to stack with the topological features extracted with Top-Sequential method. 
 
-plot_erdos_renyi.py will generate a figure called `n_iter_vs_n_world_nodes_3_layers_500_trials_iso_count.pdf` which corresponds to figure 7 in the paper. Other figures related to time and number of isomorphisms will also be generated.
-
-### To run the benchmarking methods mentioned in the paper
-
-Running the experiments will take a while depending on your hardware.
+Then, you have to 
 
 ```bash
-$ cd experiments
-$ python run_erdos_renyi.py
-$ python plot_erdos_renyi.py
+$ cd ensemble_with_others/E-LSTM-D/Completely-unobserved
+$ python convert_partial.py
+$ python generate_output.py
+$ python calculate_elstmd.py
 ```
-Change the variables in run_erdos_renyi.py to run with different settings i.e. number of layers and whether isomorphism counting is being done.
 
-plot_erdos_renyi.py will generate a figure called `n_iter_vs_n_world_nodes_3_layers_500_trials_iso_count.pdf` which corresponds to figure 7 in the paper. Other figures related to time and number of isomorphisms will also be generated.
+Very importantly, the AUC scores order that you will end up getting after the partially observed case should be: 
+`auc_methods = ['Top-Sequential-Stacking', 'Time-Series', 'Tensorial-SBM', 'E-LSTM-D', 'Ensemble-Sequential-Stacking',]`
+and the AUC scores order that you will get after the completely unobserved case will be the same order, except that you will ignore the third column, `Tensorial-SBM`, because that would be a meaningless result that is repeating the partially observed case.  
+
+
+### To run the benchmarking methods mentioned in the paper individually
+
+For E-LSTM-D:
+
+1. Download and install the code and relevant packages from: [E-LSTM-D](https://github.com/jianz94/e-lstm-d)
+2. Either you could then run their code directly to caluclate the AUC.
+3. Or you could directly run the full Ensemble-Sequential code, which automatically generate the AUC scores after the full-run.
+
+For Tensorial-SBM:
+
+1. Download and install the code and relevant packages from: [T-SBM](https://github.com/seeslab/MMmultilayer)
+2. Either you could then run their code directly to caluclate the AUC.
+3. Or you could directly run the full Ensemble-Sequential code, which automatically generate the AUC scores after the full-run.
 
 
 ### Synthetic Datasets
 
 The example runs could be found in example.py, which runs through one of the 90 synthetic network datasets we created.
-To run through the synthetic networks, please download them through the Google Drive Link here: 
+To run through the synthetic networks, please download them through the [Google Drive Link](https://drive.google.com/drive/folders/1sfycenFPrYXBHSUlJ7ovEIYHFY5-mGg2?usp=drive_link) here. 
+Once downloaded, go ahead and extract the folder into the same folder under `TOLP.py` and change the path name in the `example.py` and/or modify to your liking. 
 
-https://drive.google.com/drive/folders/1sfycenFPrYXBHSUlJ7ovEIYHFY5-mGg2?usp=drive_link
+Note that the naming of the synthetic networks could be very confusing. Here we list the naming pattern for both types of synthetic network so that the readers are not confused. We did the naming this way to avoid long and arduous names of the files.
+For the naming convention, see the functions in the python file `translate.py` for specific details. 
 
 
 ### Real World Datasets
