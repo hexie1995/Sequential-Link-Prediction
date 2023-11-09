@@ -2,7 +2,7 @@ import os
 from multiprocessing import Pool
 import numpy as np
 
-path = r"/../../community_label_TSBM//"
+path = r"../../../community_label_TSBM//"
 
 fakelist1 = []
 fakelist2 = []
@@ -48,5 +48,9 @@ def save_feat_matrix(name):
     np.save("./lstm_feat//"  +  name +"_train.npy", train_feat)
     np.save("./lstm_feat//"  +  name +"_test.npy", test_feat)     
 
-with Pool(len(data_list)) as p:
-    print(p.map(save_feat_matrix, data_list))
+#with Pool(len(data_list)) as p:
+#    print(p.map(save_feat_matrix, data_list))
+
+data_name = "fake110"
+
+save_feat_matrix(data_name)
