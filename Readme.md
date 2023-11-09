@@ -25,6 +25,7 @@ pip install scipy numpy pandas networkx scikit-learn
 This has been tested on all the popular platforms and should work for Windows, Mac OS, Linux, Google Colab, etc.
 
 To reproduce all results from our experiments, you will need at least Python 3.10 and a few packages installed(see the enviornment file for specific details). 
+
 You can check your python version with
 
 ```bash
@@ -34,12 +35,14 @@ $ python --version
 ### To run only the Top-Sequential Experiments
 
 Running the experiments will take a while depending on your hardware.
+
 The best way to run only the Top-Sequential Experiment is to follow the `example.py` file. 
 
 ```bash
 $ python example.py
 ```
 Change the variables and/or numbers in `example.py` to change the corresponding variables in the paper. 
+
 Note that you have to manually determine the number of layers you want the algorithm to work with. 
 
 - The search variable **u** could be found and replaced in `edges_orig = edges_orig[0:u]` (6 in all of our experiment)
@@ -74,6 +77,7 @@ $ python run_time_series_real.py
 ```
 
 After that, navigate towards the folder `ensemble_with_others/Ensemble_final_edition/`.
+
 Once inside the folder you have to first generate the feature matrix for the dataset first. You can do this by:
 
 ```bash
@@ -83,7 +87,9 @@ $ python process_ts.py # this will create the time series features and add them 
 ```
 
 If done correctly, you should be seeing folders named "lstm_feature", "for_sbm", "feature_metrices", "results", "all_features", "edge_tf_true", "edge_tf_tr", "ef_gen_tr", "ef_gen_tr". 
+
 Note: you might encounter folder not found error, in which case you should check the folder name in the code and make sure to change that manually. 
+
 TODO: fix this so that it could be done automatically. 
 
 Then you could go ahead and call:
@@ -95,10 +101,14 @@ $ python calculate_different_AUC.py
 This will give you the complete AUC scores result of the dataset you desired. Please change the `feat_path` in the code to your desired output path.
 
 Very importantly, the AUC scores order that you will end up getting after the partially observed case should be: 
+
 ```
 auc_methods = ['Top-Sequential-Stacking', 'Time-Series', 'Tensorial-SBM', 'E-LSTM-D', 'Ensemble-Sequential-Stacking',]
 ```
-and the AUC scores order that you will get after the completely unobserved case will be the same order, except that you will ignore the third column, `Tensorial-SBM`, because that would be a meaningless result that is repeating the partially observed case.  
+
+The AUC scores order that you will get after the completely unobserved case will be the same order, except that you will ignore the third column, `Tensorial-SBM`, because that would be a meaningless result that is repeating the partially observed case.  
+
+
 Note also: feel free to use this ensemble learning method stacked with other features of your liking. Theoritically any features that could generated with a partially observed network would work with that case, and note also completely unobserved case would require features that could be generated from the previous time slot. 
 
 
@@ -108,8 +118,9 @@ Note also that if you do not wish the run the full E-LSTM-D and Time Series, but
 $ python data_runner.py 
 ```
 
-This will give you all the feature matrix you need to further use your preferred algorithm. This gives you: 
-"for_sbm", "feature_metrices", "results", "edge_tf_true", "edge_tf_tr", "ef_gen_tr", "ef_gen_tr". 
+This will give you all the feature matrix you need to further use your preferred algorithm. 
+
+If done correctly, you should see: "for_sbm", "feature_metrices", "results", "edge_tf_true", "edge_tf_tr", "ef_gen_tr", "ef_gen_tr". 
 
 And you could then call 
 
@@ -118,9 +129,13 @@ $ python calculate_different_AUC.py
 ```
 
 You could get both the Top-Sequential AUC and the T-SBM AUC without the trouble of installing E-LSTM-D. 
+
 Namely, the choice `0` gives you Top-Sequential AUC, choice `1` gives you Time-Series, choice `2` gives you T-SBM, choices `3` gives you E-LSTM-D, and choice `4` gives you Ensemble-Sequential-Stacking, just like what is described above. 
+
 But you need to change the variable `feat_path` to your own feature path before proceed if you have **not** run the other two. If you have run the other two in the order described above, you are good to go. 
+
 And in the case you have **not** run neither Time-Series nor E-LSTM-D, you have to only the choice of `0` and `2`. Any other option will likely give you an error message. This part has been tested on Linux and Windows and Mac. 
+
 If there's any question, feel free to leave a message on Github or email directly. 
 
 
