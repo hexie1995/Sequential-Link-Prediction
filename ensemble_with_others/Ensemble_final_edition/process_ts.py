@@ -97,8 +97,8 @@ ts_col = ['ts_i', 'ts_j', 'ts_com_ne', 'ts_ave_deg_net', 'ts_var_deg_net', 'ts_a
 
 def save_df_ts(name):
 
-if not os.path.isdir("./all_features/"):
-	os.mkdir("./all_features/")
+    if not os.path.isdir("./all_features/"):
+        os.mkdir("./all_features/")
     predict_num = 3
     warnings.filterwarnings("ignore")
     feat_path = "./ef_gen_tr/"
