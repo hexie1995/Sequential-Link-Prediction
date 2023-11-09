@@ -34,8 +34,6 @@ $ python --version
 
 ### To run only the Top-Sequential Experiments
 
-Running the experiments will take a while depending on your hardware.
-
 The best way to run only the Top-Sequential Experiment is to follow the `example.py` file. 
 
 ```bash
@@ -51,6 +49,8 @@ Note that you have to manually determine the number of layers you want the algor
 Running `example.py` (which contain two functions) will generate two AUC scores, accordingly with the partially observed case and the completely unobserved case in the paper. 
 
 ### To run the full Ensemble-Sequential Experiments
+
+Running the experiments will take a while depending on your hardware. In particular, both E-LSTM-D and T-SBM could be a bit slow even for smaller networks. 
 
 We describe the process for the partially observed case, the completely unobserved case is done in the exact same setting, but with slightly different names. 
 To run the full Ensemble-Sequential experiment. You have to first:
@@ -81,8 +81,8 @@ After that, navigate towards the folder `ensemble_with_others/Ensemble_final_edi
 Once inside the folder you have to first generate the feature matrix for the dataset first. You can do this by:
 
 ```bash
-$ python create_lstm_df.py # this will create the LSTM features
 $ python data_runner.py # this will create the T-SBM features (which would be an edge indicator) and the Toplogical features
+$ python create_lstm_df.py # this will create the LSTM features
 $ python process_ts.py # this will create the time series features and add them to the end of the previous features. 
 ```
 
