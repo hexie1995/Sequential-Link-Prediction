@@ -40,7 +40,7 @@ data_list = ["chess","obrazil","bionet1", "bitcoin","emaildnc","bionet2",
 def creat_numpy_files_predictor_choice(dir_results, name, predict, choice):
 
    
-    feat_path = "./final2_all_features/"
+    feat_path = "./finalized_all_features/"
     
     with open(feat_path + 'df_t_tr'+"_"+str(name), 'rb') as pk:
         df_t_tr_ts = pickle.load(pk)
@@ -255,12 +255,12 @@ def AUC_wrapper(name):
         FEATIM.append(featim)
         VAR.append(var)
  
-    np.save("real_full_results_final2/AUPRC_"+(name)+".npy",AUPRC)
-    np.save("real_full_results_final2/AUC_"+(name)+".npy",AUC)
-    np.save("real_full_results_final2/PRE_"+(name)+".npy",PRE)
-    np.save("real_full_results_final2/REC_"+(name)+".npy",REC)
-    np.save("real_full_results_final2/FEATIM_"+(name)+".npy",FEATIM)
-    np.save("real_full_results_final2/VAR_"+(name)+".npy",VAR)
+    np.save("full_results_final/AUPRC_"+(name)+".npy",AUPRC)
+    np.save("full_results_final/AUC_"+(name)+".npy",AUC)
+    np.save("full_results_final/PRE_"+(name)+".npy",PRE)
+    np.save("full_results_final/REC_"+(name)+".npy",REC)
+    np.save("full_results_final/FEATIM_"+(name)+".npy",FEATIM)
+    np.save("full_results_final/VAR_"+(name)+".npy",VAR)
 
 
 
