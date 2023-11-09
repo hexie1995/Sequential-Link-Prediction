@@ -161,8 +161,8 @@ def generate_lstm_df(name):
     df_f_ho = pd.concat([df_f_ho_ts, df_temp_ho_f], axis=1)
     df_t_ho = pd.concat([df_t_ho_ts, df_temp_ho_t], axis=1)
 
-
-
+    if not os.path.isdir("./finalized_all_features/"):
+        os.mkdir("./finalized_all_features/")
 
     feat_path = "./finalized_all_features/"
     df_t_tr.to_pickle(feat_path + 'df_t_tr'+"_"+str(name))
