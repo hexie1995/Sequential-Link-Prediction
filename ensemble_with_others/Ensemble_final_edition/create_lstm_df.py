@@ -171,5 +171,8 @@ def generate_lstm_df(name):
     df_f_ho.to_pickle(feat_path + 'df_f_ho'+"_"+str(name))
     
     
-with Pool(len(data_list)) as p:
-    print(p.map(generate_lstm_df, data_list))
+#with Pool(len(data_list)) as p:
+#    print(p.map(generate_lstm_df, data_list))
+
+data_name = "fake110"
+generate_lstm_df(data_name)
