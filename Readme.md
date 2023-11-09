@@ -88,8 +88,8 @@ Once inside the folder you have to first generate the feature matrix for the dat
 
 ```bash
 $ python data_runner.py # this will create the T-SBM features (which would be an edge indicator) and the Toplogical features
+$ python process_ts.py # this will create the time series features and add them to the end of the previous features.
 $ python create_lstm_df.py # this will create the LSTM features
-$ python process_ts.py # this will create the time series features and add them to the end of the previous features. 
 ```
 
 If done correctly, you should be seeing folders named "lstm_feature", "for_sbm", "feature_metrices", "results", "all_features", "edge_tf_true", "edge_tf_tr", "ef_gen_tr", "ef_gen_tr". 
