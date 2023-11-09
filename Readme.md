@@ -18,7 +18,7 @@ to create the required environmnet for the code (Only if you want to use the ful
 If you wish to run only the Top-Sequential method with the topological features, you could instead do:
 
 ```bash
-conda env create -f environment-tolp.yml
+pip install scipy numpy pandas networkx scikit-learn 
 ```
 
 To reproduce our experiments, you will need at least Python 3.10 and a few packages installed(see the enviornment file for specific details). 
