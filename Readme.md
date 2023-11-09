@@ -1,6 +1,6 @@
 ### Sequential Stacking Link Prediction Algorithms for Temporal Networks 
 
-This is the github repo accompany the paper by Xie He, Amir Ghasemian, Eun Lee, Aaron Clauset, Peter Mucha. 
+This is the github repo accompany the [paper by Xie He, Amir Ghasemian, Eun Lee, Aaron Clauset, Peter Mucha](https://www.researchsquare.com/article/rs-2535525/v1). 
 The paper is currently under revision at Nature Communications.
 
 All copyright reserved. 
@@ -77,7 +77,7 @@ $ python process_ts.py # this will create the time series features and add them 
 
 If done correctly, you should be seeing folders named "lstm_feature", "for_sbm", "all_features", "edge_tf_true", "edge_tf_tr", "ef_gen_tr", "ef_gen_tr". 
 Note: you might encounter folder not found error, in which case you should check the folder name in the code and make sure to change that manually. 
-# TODO: fix this so that it could be done automatically. 
+TODO: fix this so that it could be done automatically. 
 
 Then you could go ahead and call:
 
