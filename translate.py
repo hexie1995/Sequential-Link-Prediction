@@ -1,4 +1,4 @@
-def translate_community_correlated(name):
+def translate_community_label(name):
     s = ""
     if name[4]=="1":
         s = s + "p = 0.95, "
