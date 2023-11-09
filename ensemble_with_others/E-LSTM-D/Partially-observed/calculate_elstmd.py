@@ -32,6 +32,17 @@ data_list = ["chess","obrazil","bionet1", "bitcoin","emaildnc","bionet2",
 
 
 def save_feat_matrix(name):
+
+    if not os.path.isdir("./weights/"):
+	    os.mkdir("./weights/")
+    if not os.path.isdir("./matrix/"):
+	    os.mkdir("./matrix/")
+    if not os.path.isdir("./ys/"):
+	    os.mkdir("./ys/")
+    if not os.path.isdir("./auc/"):
+	    os.mkdir("./auc/")
+
+    
     hist_len = 3
     #hist_len = hist_len - 1
     encoder = [128]
