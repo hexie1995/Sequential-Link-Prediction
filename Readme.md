@@ -34,13 +34,15 @@ $ python example.py
 ```
 Change the variables and/or numbers in `example.py` to change the corresponding variables in the paper. 
 Note that you have to manually determine the number of layers you want the algorithm to work with. 
-The search variable **u** could be found and replaced in `edges_orig = edges_orig[0:u]` (6 in all of our experiment)
-The flow variable **q** could be found and replaced in `predict_num = q` (3 in all of our experiment)
+
+- The search variable **u** could be found and replaced in `edges_orig = edges_orig[0:u]` (6 in all of our experiment)
+- The flow variable **q** could be found and replaced in `predict_num = q` (3 in all of our experiment)
 
 Running `example.py` (which contain two functions) will generate two AUC scores, accordingly with the partially observed case and the completely unobserved case in the paper. 
 
 ### To run the full Ensemble-Sequential Experiments
 
+We describe the process for the partially observed case, the completely unobserved case is done in the exact same setting, but with slightly different names. 
 To run the full Ensemble-Sequential experiment. You have to first:
 
 1. Download and install the code and relevant packages from: [E-LSTM-D](https://github.com/jianz94/e-lstm-d)
@@ -57,18 +59,40 @@ $ python calculate_elstmd.py
 ```
 this will in turn gives you a full feature matrix from E-LSTM-D, which you could used to stack with the topological features extracted with Top-Sequential method. 
 
-Then, you have to 
+Then, you have to run the Time-Series codes in order to get the features from them. 
 
 ```bash
-$ cd ensemble_with_others/E-LSTM-D/Completely-unobserved
-$ python convert_partial.py
-$ python generate_output.py
-$ python calculate_elstmd.py
+$ cd ensemble_with_others/Time-Series
+$ python run_time_series_real.py
 ```
 
+After that, navigate towards the folder `ensemble_with_others/Ensemble_final_edition/`.
+Once inside the folder you have to first generate the feature matrix for the dataset first. You can do this by:
+
+```bash
+$ python create_lstm_df.py # this will create the LSTM features
+$ python real_data_runner.py # this will create the T-SBM features (which would be an edge indicator) and the Toplogical features
+$ python process_ts.py # this will create the time series features and add them to the end of the previous features. 
+```
+
+If done correctly, you should be seeing folders named "lstm_feature", "for_sbm", "all_features", "edge_tf_true", "edge_tf_tr", "ef_gen_tr", "ef_gen_tr". 
+Note: you might encounter folder not found error, in which case you should check the folder name in the code and make sure to change that manually. 
+# TODO: fix this so that it could be done automatically. 
+
+Then you could go ahead and call:
+
+```
+$ python calculate_different_AUC.py 
+```
+
+This will give you the complete AUC scores result of the dataset you desired. 
+
 Very importantly, the AUC scores order that you will end up getting after the partially observed case should be: 
-`auc_methods = ['Top-Sequential-Stacking', 'Time-Series', 'Tensorial-SBM', 'E-LSTM-D', 'Ensemble-Sequential-Stacking',]`
+```
+auc_methods = ['Top-Sequential-Stacking', 'Time-Series', 'Tensorial-SBM', 'E-LSTM-D', 'Ensemble-Sequential-Stacking',]
+```
 and the AUC scores order that you will get after the completely unobserved case will be the same order, except that you will ignore the third column, `Tensorial-SBM`, because that would be a meaningless result that is repeating the partially observed case.  
+Note also: feel free to use this ensemble learning method stacked with other features of your liking. Theoritically any features that could generated with a partially observed network would work with that case, and note also completely unobserved case would require features that could be generated from the previous time slot. 
 
 
 ### To run the benchmarking methods mentioned in the paper individually
@@ -85,6 +109,10 @@ For Tensorial-SBM:
 2. Either you could then run their code directly to caluclate the AUC.
 3. Or you could directly run the full Ensemble-Sequential code, which automatically generate the AUC scores after the full-run.
 
+For Time Series: 
+
+1. Download and install the code and relevant packages and navigate to the folder: ensemble_with_others/Time-Series. 
+3. Modify and run the full Ensemble-Sequential code, which automatically generate the AUC scores after the full-run.
 
 ### Synthetic Datasets
 
