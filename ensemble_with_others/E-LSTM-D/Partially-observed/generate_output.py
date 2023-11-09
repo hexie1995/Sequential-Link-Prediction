@@ -2,8 +2,8 @@ import os
 from multiprocessing import Pool
 import numpy as np
 
-path = r"/home/xhe/new_fake/new_fake1//"
-#path = r"C:\Users\hexie\OneDrive\Desktop\Projects\TOLP-DESKTOP\tolp_data\real_data\\"
+path = r"/../../../community_label_TSBM//"
+
 fakelist1 = []
 fakelist2 = []
 f1 = ["1","2","3"]
