@@ -64,7 +64,9 @@ def save_feat_matrix(name):
     np.save("./ys//"  +  name +"_ytrue.npy", y)     
     np.save("./auc//" + name +".npy", auc)
     
-    
+data_name = "fake110"   
 
-with Pool(len(data_list)) as p:
-    print(p.map(save_feat_matrix, data_list))
+save_feat_matrix(path+data_name)
+
+#with Pool(len(data_list)) as p:
+#    print(p.map(save_feat_matrix, data_list))
