@@ -269,4 +269,4 @@ def AUC_wrapper(name):
 
 
 data_name = "fake110"
-run_data(data_name)
+AUC_wrapper(data_name)
