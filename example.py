@@ -44,3 +44,7 @@ def partially_observed_data(name):
     print("This is the Revision 1 AUC score")
     print(auc)
     return auc
+
+
+# replace `name` with your desired dataset, e.g. fake111. 
+partially_observed_data(name)
