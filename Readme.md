@@ -28,8 +28,7 @@ If you further with to run only Top-Sequential and Time Series, then you should 
 pip install statsmodels
 ```
 
-
-This has been tested on all the popular platforms and should work for Windows, Mac OS, Linux, Google Colab, etc.
+Top-Sequential and Time Series has been tested on all the popular platforms and should work for Windows, Mac OS, Linux, Google Colab, etc.
 
 To reproduce all results from our experiments, you will need at least Python 3.10 and a few packages installed(see the enviornment file for specific details). 
 
