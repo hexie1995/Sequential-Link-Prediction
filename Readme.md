@@ -15,21 +15,19 @@ Use the commend
 conda env create -f environment.yml
 ```
 
-to create the required environmnet for the code
+to create the required environmnet for the code.
+To reproduce our experiments, you will need at least Python 3.10 and a few packages installed(see the enviornment file for specific details). 
 
-To reproduce our experiments, you will need at least Python 3.7 and a few packages installed. You can check your python version with
+You can check your python version with
 
 ```bash
 $ python --version
-```
-and install the necessary packages with
-```bash
-$ python -m pip install numpy scipy pandas tqdm matplotlib networkx
 ```
 
 ### To run only the Top-Sequential Experiments
 
 Running the experiments will take a while depending on your hardware.
+The best way to run only the Top-Sequential Experiment is to follow the $example.py$ file. 
 
 ```bash
 $ cd experiments
