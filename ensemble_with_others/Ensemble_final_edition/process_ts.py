@@ -6,7 +6,7 @@ import OLP_FINAL_PARTIAL as tolp
 #from statsforecast import StatsForecast
 #from statsforecast.models import AutoARIMA
 from statsmodels.tsa.arima.model import ARIMA
-path = r"/home2/xhe/real_data//"
+path = r"../../community_label_TSBM//"
 import datetime as dt
 import pandas as pd
 import warnings
@@ -150,5 +150,8 @@ def save_df_ts(name):
     df_f_ho_.to_pickle(feat_path + 'df_f_ho'+"_"+str(name))
 
 
-with Pool(len(data_list1)) as p:
-    print(p.map(save_df_ts, data_list1))
+#with Pool(len(data_list1)) as p:
+#    print(p.map(save_df_ts, data_list1))
+
+data_name = "fake110"
+save_df_ts(data_name)
