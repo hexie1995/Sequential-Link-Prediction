@@ -59,7 +59,7 @@ The environment has been tested to build successfully and run the experiment suc
 
 </div>
 
-### To run only the Top-Sequential Experiments
+<h2 align="center">To run only the Top-Sequential Experiments </h2>
 
 The best way to run only the Top-Sequential Experiment is to follow the `example.py` file. 
 
@@ -77,7 +77,7 @@ Running `example.py` (which contain two functions) will generate two AUC scores,
 
 </div>
 
-### To run Top-Sequential and the T-SBM without the whole Ensemble-Sequential method (NOT VERY RECOMMENDED, but doable)
+<h2 align="center">To run Top-Sequential and the T-SBM without the whole Ensemble-Sequential method (NOT VERY RECOMMENDED, but doable) </h2>
 
 There's currently no way to run T-SBM individually in this directory, because what we have done for the paper and arguably the best way to run it individually will be to run it through its original Github [T-SBM](https://github.com/seeslab/MMmultilayer). 
 
@@ -122,7 +122,8 @@ And in the case you have **NOT** run neither Time-Series nor E-LSTM-D, you only 
 
 </div>
 
-### To run Top-Sequential, T-SBM and Time-Series without the whole Ensemble-Seqquential method (RECOMMENDED Only if having a lot of trouble with E-LSTM-D)
+<h2 align="center">To run Top-Sequential, T-SBM and Time-Series without the whole Ensemble-Seqquential method (RECOMMENDED Only if having a lot of trouble with E-LSTM-D) </h2>
+
 
 ```
 $ cd ensemble_with_others/Ensemble_final_edition
@@ -140,7 +141,7 @@ All the rest will be exactly the same as described in the above section.
 
 </div>
 
-### To run the full Ensemble-Sequential Experiments (HIGHLY RECOMMENDED if E-LSTM-D works out fine)
+<h2 align="center">To run the full Ensemble-Sequential Experiments (HIGHLY RECOMMENDED if E-LSTM-D works out fine) </h2>
 
 Running the experiments will take a while depending on your hardware. In particular, both E-LSTM-D and T-SBM could be a bit slow even for smaller networks. 
 
@@ -201,7 +202,7 @@ Note also: feel free to use this ensemble learning method stacked with other fea
 
 </div>
 
-### To run the benchmarking methods mentioned in the paper individually
+<h2 align="center">To run the benchmarking methods mentioned in the paper individually </h2>
 
 For E-LSTM-D:
 
@@ -227,7 +228,7 @@ $ python process_ts.py # this will create the time series features and add them 
 
 </div>
 
-### Synthetic Datasets
+<h2 align="center">Synthetic Datasets </h2>
 
 The example runs could be found in example.py, which runs through one of the 90 synthetic network datasets we created.
 To run through the synthetic networks, please download them through the [Google Drive Link](https://drive.google.com/drive/folders/1sfycenFPrYXBHSUlJ7ovEIYHFY5-mGg2?usp=drive_link) here. 
@@ -238,7 +239,7 @@ For the naming convention, see the functions in the python file `translate.py` f
 
 </div>
 
-### Real World Datasets
+<h2 align="center">Real World Datasets </h2>
 
 The real world networks could be found under the following links, due to copy right reasons, we will only show the link to download them:
 The following is taken from ICON: https://icon.colorado.edu/#!/networks
@@ -263,13 +264,13 @@ The following is given to us by the authors, special thanks to the authors for s
 
 </div>
 
-### Aknowledgements
+<h2 align="center">Acknowledgements </h2>
 
 Special thanks to Junyi Chen, Jonathan T. Lindbloom, Lizuo Liu, Ryan Maguire for their help during the progress of this project. 
 
 </div>
 
-### Previous Mistakes
+<h2 align="center">Previous Mistakes </h2>
 
 You could also find the past bugged version of the code both in the same folder and on Github for debugging purposes. The noticable change could be found in the Github history.
 There might still unfound BUGs, email me or leave a message as you see fit. 
