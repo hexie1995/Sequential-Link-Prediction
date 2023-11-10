@@ -5,7 +5,7 @@ The paper is currently under revision at Nature Communications.
 
 **Please cite the paper when using the data or code. See License Information for more details on Usage.**
 
-**To ensure reproducbility, the below information has been tested and successfully run by vonlunteers on Linux, Mac, and Windows.**
+**To ensure reproducbility, the below information has been tested and successfully run by vonlunteers who read the Github and then experimented on Linux, Mac, Windows, and Google Colab.**
 
 ### System requirements
 
@@ -43,7 +43,7 @@ If you run into trouble with the above conda commends or the original E-LSTM-D G
 pip install python==3.6.15 scipy==1.4.0 tensorflow==1.14.0 keras==2.2.4 imblearn scikit-learn==0.19.0 networkx==2.5.1 pandas==1.0.5 statsmodels==0.13.5 numpy==1.14.5
 ```
 
-The above environment has been tested to build successfully and run the experiment successfully on all the popular platforms and should work for Windows, Mac OS, Linux, Google Colab, etc, if installed correctly. 
+The environment has been tested to build successfully and run the experiment successfully on all the popular platforms and should work for Windows, Mac OS, Linux, Google Colab, etc, if installed correctly. 
 
 
 ### To run only the Top-Sequential Experiments
@@ -63,11 +63,13 @@ Note that you have to manually determine the number of layers you want the algor
 Running `example.py` (which contain two functions) will generate two AUC scores, accordingly with the partially observed case and the completely unobserved case in the paper. 
 
 
-### To run Top-Sequential and the T-SBM without the whole Ensemble-Seqquential method (NOT VERY RECOMMENDED, BUT DOABLE)
+### To run Top-Sequential and the T-SBM without the whole Ensemble-Seqquential method (NOT VERY RECOMMENDED, but doable)
 
 There's currently no way to run T-SBM individually in this directory, because what we have done for the paper and arguably the best way to run it individually will be to run it through its original Github [T-SBM](https://github.com/seeslab/MMmultilayer). 
 
-Note also that if you do not wish the run the full E-LSTM-D and Time Series, but are only interested in the toplogical feature + T-SBM, you could simply navigate to the folder, and run:
+You could get both the Top-Sequential AUC and the T-SBM AUC without the trouble of installing anything else. 
+
+If you do not wish the run the full E-LSTM-D and Time Series, but are only interested in the toplogical feature + T-SBM, you could simply navigate to the folder, and run:
 
 ```
 $ cd ensemble_with_others/Ensemble_final_edition
@@ -78,21 +80,25 @@ This will give you all the feature matrix you need to further use your preferred
 
 If done correctly, you should see: "for_sbm", "feature_metrices", "results", "edge_tf_true", "edge_tf_tr", "ef_gen_ho", "ef_gen_tr". 
 
-And you could then call 
+But you need to change the variable `feat_path` in the file `calculate_different_AUC.py` to your own feature path before proceed if you have **NOT** run the other two commands(see below for details). 
+
+Because now that the order is disturbed, you need to load the feature matrix from the folder named `feat_path = "./ef_gen_tr/"` for the training matrix, and then `feat_path = "./ef_gen_ho/"` for the hold out matrix. Note also that you need to rename them in order to make `calculate_different_AUC.py ` recognize them. To be even more specific, the input of the  `calculate_different_AUC.py ` requires four different things: `df_t_tr` for the true training edges, 'df_f_tr' for the false training edges, and `df_t_ho` for the true hold out edges, and `df_f_ho` for the false holdout edges. Thus you should make sure that these files all exist before you do anything else. Likely they live in the previously mentioned folders, probably named to just be "df_t" and "df_f". 
+
+To help the reader make this process easier, I have built the function `TOP_TSBM_postprocess.py` as a help function to make this process easier. Please put in the same folder as `data_runner.py`. Please be careful with this function as it **WILL OVERWRITE** the final output if you directly run it after you have successfully built everything. This file should be run **BEFORE** you call `python calculate_different_AUC.py`.  
+
+```
+$ python TOP_TSBM_postprocess.py
+```
+
+Thus, it is highly recommended that you finish the whole process first, or **at least finish the Time-Series part first** before you proceed to call `calculate_different_AUC.py`. 
+
+Once you are sure that you have the feature matrix you want in the folder you want it in, go ahead and call: 
 
 ```
 $ python calculate_different_AUC.py 
 ```
 
-You could get both the Top-Sequential AUC and the T-SBM AUC without the trouble of installing anything else. 
-
-But you need to change the variable `feat_path` in the file `calculate_different_AUC.py` to your own feature path before proceed if you have **NOT** run the other two commands(see below for details). 
-
-Because now that the order is disturbed, you need to load the feature matrix from the folder named `feat_path = "./ef_gen_tr/"` for the training matrix, and then `feat_path = "./ef_gen_ho/"` for the hold out matrix. Note also that you need to rename them in order to make `calculate_different_AUC.py ` recognize them. To be even more specific, the input of the  `calculate_different_AUC.py ` requires four different things: `df_t_tr` for the true training edges, 'df_f_tr' for the false training edges, and `df_t_ho` for the true hold out edges, and `df_f_ho` for the false holdout edges. Thus you should make sure that these files all exist before you do anything else. Likely they live in the previously mentioned folders, probably named to just be "df_t" and "df_f". 
-
-Thus, it is highly recommended that you finish the whole process first, or **at least finish the Time-Series part first** before you proceed to call `calculate_different_AUC.py`. 
-
-If you have run the other two in the order described above, then you are good, as this function is meant to be called after all the feature metrices has been generated. 
+If you have run the other two in the order described above, then you can ignore the whole section above and directly call it, as this function is meant to be called after all the feature metrices has been generated. 
 
 Very Importantly, in the file `calculate_different_AUC.py`, the main loop contain a variable named `choice`. 
 
