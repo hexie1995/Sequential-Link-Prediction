@@ -17,6 +17,8 @@ The paper is currently under revision at Nature Communications.
 
 **To ensure reproducbility, the below information has been tested and successfully run by vonlunteers who read the Github and then experimented on Linux, Mac, Windows, and Google Colab.**
 
+</div>
+
 ### System requirements
 
 To reproduce all results from our experiments, you will need at least Python 3.6.7 and a few packages installed(see the enviornment file for specific details). 
@@ -55,6 +57,7 @@ pip install python==3.6.15 scipy==1.4.0 tensorflow==1.14.0 keras==2.2.4 imblearn
 
 The environment has been tested to build successfully and run the experiment successfully on all the popular platforms and should work for Windows, Mac OS, Linux, Google Colab, etc, if installed correctly. 
 
+</div>
 
 ### To run only the Top-Sequential Experiments
 
@@ -72,14 +75,15 @@ Note that you have to manually determine the number of layers you want the algor
 
 Running `example.py` (which contain two functions) will generate two AUC scores, accordingly with the partially observed case and the completely unobserved case in the paper. 
 
+</div>
 
-### To run Top-Sequential and the T-SBM without the whole Ensemble-Seqquential method (NOT VERY RECOMMENDED, but doable)
+### To run Top-Sequential and the T-SBM without the whole Ensemble-Sequential method (NOT VERY RECOMMENDED, but doable)
 
 There's currently no way to run T-SBM individually in this directory, because what we have done for the paper and arguably the best way to run it individually will be to run it through its original Github [T-SBM](https://github.com/seeslab/MMmultilayer). 
 
 You could get both the Top-Sequential AUC and the T-SBM AUC without the trouble of installing anything else. 
 
-If you do not wish the run the full E-LSTM-D and Time Series, but are only interested in the toplogical feature + T-SBM, you could simply navigate to the folder, and run:
+If you do not wish the run the full E-LSTM-D and Time Series, but are only interested in the toplogical feature and T-SBM, you could simply navigate to the folder, and run:
 
 ```
 $ cd ensemble_with_others/Ensemble_final_edition
@@ -116,6 +120,7 @@ The choice `0` gives you Top-Sequential AUC, choice `1` gives you Time-Series, c
 
 And in the case you have **NOT** run neither Time-Series nor E-LSTM-D, you only have the choice of `0` and `2`. Any other option will likely give you an error message. 
 
+</div>
 
 ### To run Top-Sequential, T-SBM and Time-Series without the whole Ensemble-Seqquential method (RECOMMENDED Only if having a lot of trouble with E-LSTM-D)
 
@@ -133,6 +138,7 @@ $ python calculate_different_AUC.py
 
 All the rest will be exactly the same as described in the above section. 
 
+</div>
 
 ### To run the full Ensemble-Sequential Experiments (HIGHLY RECOMMENDED if E-LSTM-D works out fine)
 
@@ -193,6 +199,7 @@ Note also: feel free to use this ensemble learning method stacked with other fea
 
 **If there's any question, feel free to leave a message on Github or email directly.**
 
+</div>
 
 ### To run the benchmarking methods mentioned in the paper individually
 
@@ -218,6 +225,7 @@ $ python data_runner.py # this will create the T-SBM features (which would be an
 $ python process_ts.py # this will create the time series features and add them to the end of the previous features.
 ```
 
+</div>
 
 ### Synthetic Datasets
 
@@ -228,6 +236,7 @@ Once downloaded, go ahead and extract the folder into the same folder under `TOL
 Note that the naming of the synthetic networks could be very confusing. Here we list the naming pattern for both types of synthetic network so that the readers are not confused. We did the naming this way to avoid long and arduous names of the files.
 For the naming convention, see the functions in the python file `translate.py` for specific details. 
 
+</div>
 
 ### Real World Datasets
 
@@ -252,9 +261,13 @@ The following is given to us by the authors, special thanks to the authors for s
 - bionet1-2: https://www3.nd.edu/~tmilenko/software_data.html
 - Khalique Newaz and Tijana Milenkovic (2020), Improving inference of the dynamic biological network underlying aging via network propagation, IEEE/ACM Transactions on Computational Biology and Bioinformatics, DOI: 10.1109/TCBB.2020.3022767.
 
+</div>
+
 ### Aknowledgements
 
 Special thanks to Junyi Chen, Jonathan T. Lindbloom, Lizuo Liu, Ryan Maguire for their help during the progress of this project. 
+
+</div>
 
 ### Previous Mistakes
 
