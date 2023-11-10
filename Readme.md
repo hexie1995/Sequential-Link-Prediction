@@ -17,6 +17,7 @@ The paper is currently under revision at Nature Communications.
 
 **To ensure reproducbility, the below information has been tested and successfully run by vonlunteers who read the Github and then experimented on Linux, Mac, Windows, and Google Colab.**
 
+
 </div>
 
 <h2 align="center">System Requirements </h2>
@@ -49,19 +50,34 @@ If you further with to run Time Series, then you should also install:
 pip install statsmodels
 ```
 
-If you run into trouble with the above conda commends or the original E-LSTM-D Github, but you want to run the E-LSTM-D and the full Ensemble-Sequential method, then you should install: 
+If you run into trouble with the above conda commends or the original E-LSTM-D Github, but you want to run the E-LSTM-D and the full Ensemble-Sequential method, then you should first make sure you have python 3.6.7+ but no more than 3.7.
+Then you could try do the following:
 
 ```bash
-pip install python==3.6.15 scipy==1.4.0 tensorflow==1.14.0 keras==2.2.4 imblearn scikit-learn==0.19.0 networkx==2.5.1 pandas==1.0.5 statsmodels==0.13.5 numpy==1.14.5
+pip install tensorflow==1.14.0 keras==2.2.4 Imbalanced-learn==0.8.1 scipy==1.5.4 scikit-learn==0.24.2 networkx==2.5.1 pandas==1.1.5 statsmodels==0.12.2 numpy==1.19.5
 ```
 
-The environment has been tested to build successfully and run the experiment successfully on all the popular platforms and should work for Windows, Mac OS, Linux, Google Colab, etc, if installed correctly. 
+The environment has been tested to build successfully and run all the following experiment successfully on all the popular platforms and should work for Windows, Mac OS, and Linux, if installed correctly. 
+
+
+</div>
+
+<h2 align="center">Data Input Format Requirements </h2>
+
+**Throughout the usage of this repo, please make sure your nodes are labled from 0 to N continuously with integer as their idx. This applys to real-world networks too. Node string name is not yet supported.**
+
+The input files of the network should be put in a folder that is the name of that network. Each temporal layer should be seperated into different files starting at number 1.
+
+In other words, in the directory `fake110`, it should contain `fake110_1.txt`, `fake110_2.txt`, etc.  
+
+The content of the txt file should be: `source_node_idx target_node_idx` for each edge on each line. See the example synthetic dataset for more reference.
+
 
 </div>
 
 <h2 align="center">To run only the Top-Sequential Experiments </h2>
 
-The best way to run only the Top-Sequential Experiment is to follow the `example.py` file. 
+The best way to run only the Top-Sequential Experiment is to follow the `example.py` file. In order to run it, first you have to unzip the `community_label_TSBM.zip`. 
 
 ```bash
 $ python example.py
@@ -237,7 +253,6 @@ Once downloaded, go ahead and extract the folder into the same folder under `TOL
 Note that the naming of the synthetic networks could be very confusing. Here we list the naming pattern for both types of synthetic network so that the readers are not confused. We did the naming this way to avoid long and arduous names of the files.
 For the naming convention, see the functions in the python file `translate.py` for specific details. 
 
-**Throughout the usage of this repo, please make sure your nodes are labled from 0 to N continuously with integer as their idx. This applys to real-world networks too.**
 
 </div>
 
