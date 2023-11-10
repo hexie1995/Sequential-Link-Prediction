@@ -54,10 +54,10 @@ If you run into trouble with the above conda commends or the original E-LSTM-D G
 Then you could try do the following:
 
 ```bash
-pip install tensorflow==1.14.0 keras==2.2.4 Imbalanced-learn==0.8.1 scipy==1.5.4 scikit-learn==0.24.2 networkx==2.5.1 pandas==1.1.5 statsmodels==0.12.2 numpy==1.19.5
+pip install tensorflow==1.14.0 keras==2.2.4 Imbalanced-learn==0.8.1 scipy==1.5.4 scikit-learn==0.24.2 networkx==2.5.1 pandas==1.1.5 statsmodels==0.12.2 numpy==1.14.5
 ```
 
-The environment has been tested to build successfully and run all the following experiment successfully on all the popular platforms and should work for Windows, Mac OS, and Linux, if installed correctly. 
+The environment has been tested to build successfully and run all the following experiment successfully on all the popular platforms and should work for Windows, Mac OS, and Linux, if installed correctly. (numpy 1.19.5 is also okay)
 
 
 </div>
