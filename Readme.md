@@ -237,6 +237,8 @@ Once downloaded, go ahead and extract the folder into the same folder under `TOL
 Note that the naming of the synthetic networks could be very confusing. Here we list the naming pattern for both types of synthetic network so that the readers are not confused. We did the naming this way to avoid long and arduous names of the files.
 For the naming convention, see the functions in the python file `translate.py` for specific details. 
 
+**Throughout the usage of this repo, please make sure your nodes are labled from 0 to N continuously with integer as their idx. This applys to real-world networks too.**
+
 </div>
 
 <h2 align="center">Real World Datasets </h2>
