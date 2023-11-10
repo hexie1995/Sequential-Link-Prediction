@@ -66,6 +66,7 @@ In other words, in the directory `fake110`, it should contain `fake110_1.txt`, `
 
 The content of the txt file should be: `source_node_idx target_node_idx` for each edge on each line. See the example synthetic dataset for more reference.
 
+**For simplicity, here I only describe the process for the partially observed case, the completely unobserved case is done in the exact same setting, but with slightly different named python files (usually there's the word complete in the file name).**
 
 </div>
 
@@ -89,9 +90,9 @@ Running `example.py` (which contain two functions) will generate two AUC scores,
 
 <h2 align="center">To run Top-Sequential and the T-SBM without the whole Ensemble-Sequential method (NOT VERY RECOMMENDED, but doable) </h2>
 
-There's currently no way to run T-SBM individually in this directory, because what we have done for the paper and arguably the best way to run it individually will be to run it through its original Github [T-SBM](https://github.com/seeslab/MMmultilayer). 
+There's currently no way to run T-SBM individually in this directory, because arguably the best way to run it individually will be to run it through its original Github [T-SBM](https://github.com/seeslab/MMmultilayer). 
 
-You could get both the Top-Sequential AUC and the T-SBM AUC without the trouble of installing anything else. 
+Running the experiments will take a while depending on your hardware. In particular, T-SBM could be a bit slow even for smaller networks. 
 
 If you do not wish the run the full E-LSTM-D and Time Series, but are only interested in the toplogical feature and T-SBM, you could simply navigate to the folder, and run:
 
@@ -153,9 +154,7 @@ All the rest will be exactly the same as described in the above section.
 
 <h2 align="center">To run the full Ensemble-Sequential Experiments (HIGHLY RECOMMENDED if E-LSTM-D works out fine) </h2>
 
-Running the experiments will take a while depending on your hardware. In particular, both E-LSTM-D and T-SBM could be a bit slow even for smaller networks. 
-
-For simplicity, here I only describe the process for the partially observed case, the completely unobserved case is done in the exact same setting, but with slightly different nameed python files (usually there's the word complete in the file name). 
+Running the experiments will take a while depending on your hardware. In particular, T-SBM could be a bit slow even for smaller networks. 
 
 To run the full Ensemble-Sequential experiment. You have to first:
 
