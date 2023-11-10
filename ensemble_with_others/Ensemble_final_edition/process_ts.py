@@ -6,13 +6,15 @@ import OLP_FINAL_PARTIAL as tolp
 #from statsforecast import StatsForecast
 #from statsforecast.models import AutoARIMA
 from statsmodels.tsa.arima.model import ARIMA
-path = r"../../community_label_TSBM//"
+import os
 import datetime as dt
 import pandas as pd
 import warnings
 import pickle
 
 warnings.filterwarnings("ignore")
+
+path = r"../../community_label_TSBM//"
 
 fakelist1 = []
 fakelist2 = []
