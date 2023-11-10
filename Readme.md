@@ -30,18 +30,10 @@ You can check your python version with
 $ python --version
 ```
 
-Use the commend
-
-```bash
-conda env create -f environment.yml
-```
-
-to create the required environmnet for the code (**Only if you want to use the full Ensemble-Sequential**, because of the dependency of [E-LSTM-D](https://github.com/jianz94/e-lstm-d), Time Series, and [T-SBM](https://github.com/seeslab/MMmultilayer)).
-
 Alternatively, if you wish to run only the Top-Sequential or T-SBM method with the topological features, you could instead do:
 
 ```bash
-pip install scipy numpy pandas networkx scikit-learn imblearn
+pip install Imbalanced-learn scipy numpy pandas networkx scikit-learn
 ```
 
 If you further with to run Time Series, then you should also install:
@@ -50,14 +42,16 @@ If you further with to run Time Series, then you should also install:
 pip install statsmodels
 ```
 
-If you run into trouble with the above conda commends or the original E-LSTM-D Github, but you want to run the E-LSTM-D and the full Ensemble-Sequential method, then you should first make sure you have python 3.6.7+ but no more than 3.7.
-Then you could try do the following:
+If you run into trouble with the original E-LSTM-D Github, but you want to run the E-LSTM-D and the full Ensemble-Sequential method, then you should first make sure you have python 3.6.7+ but no more than 3.7.
+Then you could try do the following to create the required environmnet for the code (**Only if you want to use the full Ensemble-Sequential**, because of the dependency of [E-LSTM-D](https://github.com/jianz94/e-lstm-d), Time Series, and [T-SBM](https://github.com/seeslab/MMmultilayer)).
+
 
 ```bash
 pip install tensorflow==1.14.0 keras==2.2.4 Imbalanced-learn==0.8.1 scipy==1.5.4 scikit-learn==0.24.2 networkx==2.5.1 pandas==1.1.5 statsmodels==0.12.2 numpy==1.14.5
 ```
 
-The environment has been tested to build successfully and run all the following experiment successfully on all the popular platforms and should work for Windows, Mac OS, and Linux, if installed correctly. (numpy 1.19.5 is also okay)
+The above environment has been tested to build successfully and run all the following experiment successfully on all the popular platforms and should work for Windows, Mac OS, and Linux, if installed correctly. (numpy 1.19.5 is also okay)
+
 
 
 </div>
