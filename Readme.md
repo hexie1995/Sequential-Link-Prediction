@@ -1,8 +1,8 @@
 <div align="center">
-<img src="logo.pdf" alt="logo">
+<img src="logo.png" alt="logo">
 </div>
 
-<h2 align="center">Subgraph Matching on Multiplex Networks</h2>
+<h2 align="center">Sequential Stacking Link Prediction </h2>
 
 </div>
 
