@@ -19,7 +19,7 @@ The paper is currently under revision at Nature Communications.
 
 </div>
 
-### System requirements
+<h2 align="center">System Requirements </h2>
 
 To reproduce all results from our experiments, you will need at least Python 3.6.7 and a few packages installed(see the enviornment file for specific details). 
 
