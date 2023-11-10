@@ -1,3 +1,13 @@
+<div align="center">
+<img src="logo.pdf" alt="logo">
+</div>
+
+<h2 align="center">Subgraph Matching on Multiplex Networks</h2>
+
+</div>
+
+
+
 ### Sequential Stacking Link Prediction Algorithms for Temporal Networks 
 
 This is the github repo accompany the [paper by Xie He, Amir Ghasemian, Eun Lee, Aaron Clauset, Peter Mucha](https://www.researchsquare.com/article/rs-2535525/v1). 
