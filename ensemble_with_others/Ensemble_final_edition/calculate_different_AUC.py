@@ -254,7 +254,10 @@ def AUC_wrapper(name):
         REC.append(recall)
         FEATIM.append(featim)
         VAR.append(var)
- 
+    
+    if not os.path.isdir("./full_results_final/"):
+        os.mkdir("./full_results_final/")
+    
     np.save("full_results_final/AUPRC_"+(name)+".npy",AUPRC)
     np.save("full_results_final/AUC_"+(name)+".npy",AUC)
     np.save("full_results_final/PRE_"+(name)+".npy",PRE)
