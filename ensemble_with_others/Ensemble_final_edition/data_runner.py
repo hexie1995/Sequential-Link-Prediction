@@ -22,7 +22,7 @@ def run_data(name):
 
     lstm = np.load(path+name+"/"+ name+".npy")
     predict_num = 3
-    auprc, auc, precision, recall, featim, feats = tolp.top_final_partial(edges_orig[0:6],edges_orig[6], predict_num, name, lstm)
+    tolp.top_final_partial(edges_orig[0:6],edges_orig[6], predict_num, name, lstm)
     
 
      
