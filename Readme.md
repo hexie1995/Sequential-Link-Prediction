@@ -15,14 +15,14 @@ The paper is currently under revision at Nature Communications.
 
 **Please cite the paper when using the data or code. See License Information for more details on Usage.**
 
-**To ensure reproducbility, the below information has been tested and successfully run by vonlunteers who read the Github and then experimented on Linux, Mac, Windows, and Google Colab.**
+**To ensure reproducbility, the below information has been tested and successfully run by vonlunteers who read the Github and then experimented on Linux, Mac, Windows, and Google Colab(except the E-LSTM-D, because it does not work for Google Colab, but should work on all other platforms).**
 
 
 </div>
 
 <h2 align="center">System Requirements </h2>
 
-To reproduce all results from our experiments, you will need at least Python 3.6.7 and a few packages installed(see the enviornment file for specific details). 
+To reproduce all results from our experiments, you will need at least Python 3.6.7(but E-LSTM-D will not work above 3.7) and a few packages installed (see the enviornment file for specific details). 
 
 You can check your python version with
 
@@ -43,7 +43,7 @@ pip install statsmodels
 ```
 
 If you run into trouble with the original E-LSTM-D Github, but you want to run the E-LSTM-D and the full Ensemble-Sequential method, then you should first make sure you have python 3.6.7+ but no more than 3.7.
-Then you could try do the following to create the required environmnet for the code (**Only if you want to use the full Ensemble-Sequential**, because of the dependency of [E-LSTM-D](https://github.com/jianz94/e-lstm-d), Time Series, and [T-SBM](https://github.com/seeslab/MMmultilayer)).
+Then you could try do the following to create the required environment for the code (**Only if you want to use the full Ensemble-Sequential**, because of the dependency of [E-LSTM-D](https://github.com/jianz94/e-lstm-d), Time Series, and [T-SBM](https://github.com/seeslab/MMmultilayer)).
 
 
 ```bash
@@ -133,7 +133,7 @@ And in the case you have **NOT** run neither Time-Series nor E-LSTM-D, you only 
 
 </div>
 
-<h2 align="center">To run Top-Sequential, T-SBM and Time-Series without the whole Ensemble-Seqquential method (RECOMMENDED Only if having a lot of trouble with E-LSTM-D) </h2>
+<h2 align="center">To run Top-Sequential, T-SBM and Time-Series without the whole Ensemble-Sequential method (RECOMMENDED Only if having a lot of trouble with E-LSTM-D) </h2>
 
 
 ```
@@ -283,7 +283,7 @@ Special thanks to Junyi Chen, Jonathan T. Lindbloom, Lizuo Liu, Ryan Maguire for
 <h2 align="center">Previous Mistakes </h2>
 
 You could also find the past bugged version of the code both in the same folder and on Github for debugging purposes. The noticable change could be found in the Github history.
-There might still unfound BUGs, email me or leave a message as you see fit. 
+There might still be unfound BUGs, email me or leave a message as you see fit. 
 
 
 
