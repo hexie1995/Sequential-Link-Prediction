@@ -22,7 +22,7 @@ The paper is currently under revision at Nature Communications.
 
 <h2 align="center">System Requirements </h2>
 
-To reproduce all results from our experiments, you will need at least Python 3.6.7(but E-LSTM-D will not work above 3.7) and a few packages installed (see the enviornment file for specific details). 
+To reproduce all results from our experiments, you will need at least Python 3.6.7 (but E-LSTM-D will not work above 3.7) and a few packages installed (see the enviornment file for specific details). 
 
 You can check your python version with
 
