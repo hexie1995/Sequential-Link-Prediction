@@ -10,12 +10,12 @@
 
 ### Sequential Stacking Link Prediction Algorithms for Temporal Networks 
 
-This is the github repo accompany the [paper by Xie He, Amir Ghasemian, Eun Lee, Aaron Clauset, Peter Mucha](https://www.researchsquare.com/article/rs-2535525/v1). 
+This is the GitHub repo accompany the [paper by Xie He, Amir Ghasemian, Eun Lee, Aaron Clauset, Peter Mucha](https://www.researchsquare.com/article/rs-2535525/v1). 
 The paper is currently under revision at Nature Communications. 
 
 **Please cite the paper when using the data or code. See License Information for more details on Usage.**
 
-**To ensure reproducbility, the below information has been tested and successfully run by vonlunteers who read the Github and then experimented on Linux, Mac, Windows, and Google Colab(except the E-LSTM-D, because it does not work for Google Colab, but should work on all other platforms).**
+**To ensure reproducbility, the below information has been tested and successfully run by vonlunteers who read the GitHub and then experimented on Linux, Mac, Windows, and Google Colab(except the E-LSTM-D, because it does not work for Google Colab, but should work on all other platforms).**
 
 
 </div>
@@ -42,7 +42,7 @@ If you further with to run Time Series, then you should also install:
 pip install statsmodels
 ```
 
-If you run into trouble with the original E-LSTM-D Github, but you want to run the E-LSTM-D and the full Ensemble-Sequential method, then you should first make sure you have python 3.6.7+ but no more than 3.7.
+If you run into trouble with the original E-LSTM-D GitHub, but you want to run the E-LSTM-D and the full Ensemble-Sequential method, then you should first make sure you have python 3.6.7+ but no more than 3.7.
 Then you could try do the following to create the required environment for the code (**Only if you want to use the full Ensemble-Sequential**, because of the dependency of [E-LSTM-D](https://github.com/jianz94/e-lstm-d), Time Series, and [T-SBM](https://github.com/seeslab/MMmultilayer)).
 
 
@@ -90,7 +90,7 @@ Running `example.py` (which contain two functions) will generate two AUC scores,
 
 <h2 align="center">To run Top-Sequential and the T-SBM without the whole Ensemble-Sequential method (NOT VERY RECOMMENDED, but doable) </h2>
 
-There's currently no way to run T-SBM individually in this directory, because arguably the best way to run it individually will be to run it through its original Github [T-SBM](https://github.com/seeslab/MMmultilayer). 
+There's currently no way to run T-SBM individually in this directory, because arguably the best way to run it individually will be to run it through its original GitHub [T-SBM](https://github.com/seeslab/MMmultilayer). 
 
 Running the experiments will take a while depending on your hardware. In particular, T-SBM could be a bit slow even for smaller networks. 
 
@@ -207,7 +207,7 @@ The AUC scores order that you will get after the completely unobserved case will
 
 Note also: feel free to use this ensemble learning method stacked with other features of your liking. Theoritically any features that could generated with a partially observed network would work with that case, and note also completely unobserved case would require features that could be generated from the previous time slot. 
 
-**If there's any question, feel free to leave a message on Github or email directly.**
+**If there's any question, feel free to leave a message on GitHub or email directly.**
 
 </div>
 
@@ -282,7 +282,7 @@ Special thanks to Junyi Chen, Jonathan T. Lindbloom, Lizuo Liu, Ryan Maguire for
 
 <h2 align="center">Previous Mistakes </h2>
 
-You could also find the past bugged version of the code both in the same folder and on Github for debugging purposes. The noticable change could be found in the Github history.
+You could also find the past bugged version of the code both in the same folder and on GitHub for debugging purposes. The noticable change could be found in the GitHub history.
 There might still be unfound BUGs, email me or leave a message as you see fit. 
 
 
