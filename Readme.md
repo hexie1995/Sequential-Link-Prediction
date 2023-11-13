@@ -15,7 +15,7 @@ The paper is currently under revision at Nature Communications.
 
 **Please cite the paper when using the data or code. See License Information for more details on Usage.**
 
-**To ensure reproducbility, the below information has been tested and successfully run by vonlunteers who read the GitHub and then experimented on Linux, Mac, Windows, and Google Colab(except the E-LSTM-D, because it does not work for Google Colab, but should work on all other platforms).**
+**To ensure reproducbility, the below information has been tested and successfully run by vonlunteers who read the GitHub and then experimented on Linux, Mac, Windows, and Google Colab(except the E-LSTM-D, because it does not work for Google Colab, but should work on all other platforms with the constraints described below).**
 
 
 </div>
