@@ -36,7 +36,7 @@ Alternatively, if you wish to run only the Top-Sequential or T-SBM method with t
 pip install Imbalanced-learn scipy numpy pandas networkx scikit-learn
 ```
 
-If you further with to run Time Series, then you should also install:
+If you further wish to run Time Series, then you should also install:
 
 ```bash
 pip install statsmodels
@@ -50,7 +50,7 @@ Then you could try do the following to create the required environment for the c
 pip install tensorflow==1.14.0 keras==2.2.4 Imbalanced-learn==0.8.1 scipy==1.5.4 scikit-learn==0.24.2 networkx==2.5.1 pandas==1.1.5 statsmodels==0.12.2 numpy==1.14.5
 ```
 
-The above environment has been tested to build successfully and run all the following experiment successfully on all the popular platforms and should work for Windows, Mac OS, and Linux, if installed correctly. (numpy 1.19.5 is also okay)
+The above environment has been tested to build successfully and run all the following experiments successfully on all the popular platforms and should work for Windows, Mac OS, and Linux, if installed correctly. (numpy 1.19.5 is also okay)
 
 
 
@@ -58,13 +58,13 @@ The above environment has been tested to build successfully and run all the foll
 
 <h2 align="center">Data Input Format Requirements </h2>
 
-**Throughout the usage of this repo, please make sure your nodes are labled from 0 to N continuously with integer as their idx. This applys to real-world networks too. Node string name is not yet supported.**
+**Throughout the usage of this repo, please make sure your nodes are labeled from 0 to N-1 with integer as their index. This applies to real-world networks too. Node string names are not yet supported.**
 
-The input files of the network should be put in a folder that is the name of that network. Each temporal layer should be seperated into different files starting at number 1.
+The input files of the network should be put in a folder that is the name of that network. Each temporal layer should be separated into different files starting at number 1.
 
 In other words, in the directory `fake110`, it should contain `fake110_1.txt`, `fake110_2.txt`, etc.  
 
-The content of the txt file should be: `source_node_idx target_node_idx` for each edge on each line. See the example synthetic dataset for more reference.
+The content of the txt file should be: `source_node_idx target_node_idx` for each edge on each line. See the example synthetic dataset as a reference.
 
 **For simplicity, here I only describe the process for the partially observed case, the completely unobserved case is done in the exact same setting, but with slightly different named python files (usually there's the word complete in the file name).**
 
@@ -81,8 +81,8 @@ Change the variables and/or numbers in `example.py` to change the corresponding 
 
 Note that you have to manually determine the number of layers you want the algorithm to work with. 
 
-- The search variable **u** could be found and replaced in `edges_orig = edges_orig[0:u]` (6 in all of our experiment)
-- The flow variable **q** could be found and replaced in `predict_num = q` (3 in all of our experiment)
+- The search variable **u** could be found and replaced in `edges_orig = edges_orig[0:u]` (6 in all of our experiments)
+- The flow variable **q** could be found and replaced in `predict_num = q` (3 in all of our experiments)
 
 Running `example.py` (which contain two functions) will generate two AUC scores, accordingly with the partially observed case and the completely unobserved case in the paper. 
 
@@ -105,7 +105,7 @@ This will give you all the feature matrix you need to further use your preferred
 
 If done correctly, you should see: "for_sbm", "feature_metrices", "results", "edge_tf_true", "edge_tf_tr", "ef_gen_ho", "ef_gen_tr". 
 
-But you need to change the variable `feat_path` in the file `calculate_different_AUC.py` to your own feature path before proceed if you have **NOT** run the other two commands(see below for details). 
+You need to change the variable `feat_path` in the file `calculate_different_AUC.py` to your own feature path before proceeding if you have **NOT** run the other two commands (see below for details). 
 
 Because now that the order is disturbed, you need to load the feature matrix from the folder named `feat_path = "./ef_gen_tr/"` for the training matrix, and then `feat_path = "./ef_gen_ho/"` for the hold out matrix. Note also that you need to rename them in order to make `calculate_different_AUC.py ` recognize them. To be even more specific, the input of the  `calculate_different_AUC.py ` requires four different things: `df_t_tr` for the true training edges, 'df_f_tr' for the false training edges, and `df_t_ho` for the true hold out edges, and `df_f_ho` for the false holdout edges. Thus you should make sure that these files all exist before you do anything else. Likely they live in the previously mentioned folders, probably named to just be "df_t" and "df_f". 
 
@@ -123,7 +123,7 @@ Once you are sure that you have the feature matrix you want in the folder you wa
 $ python calculate_different_AUC.py 
 ```
 
-If you have run the other two in the order described above, then you can ignore the whole section above and directly call it, as this function is meant to be called after all the feature metrices has been generated. 
+If you have run the other two in the order described above, then you can ignore the whole section above and directly call it, as this function is meant to be called after all the feature matrices have been generated. 
 
 Very Importantly, in the file `calculate_different_AUC.py`, the main loop contain a variable named `choice`. 
 
@@ -152,17 +152,17 @@ All the rest will be exactly the same as described in the above section.
 
 </div>
 
-<h2 align="center">To run the full Ensemble-Sequential Experiments (HIGHLY RECOMMENDED if E-LSTM-D works out fine) </h2>
+<h2 align="center">To run the full Ensemble-Sequential Experiment (HIGHLY RECOMMENDED if E-LSTM-D works out fine) </h2>
 
 Running the experiments will take a while depending on your hardware. In particular, T-SBM could be a bit slow even for smaller networks. 
 
-To run the full Ensemble-Sequential experiment. You have to first:
+To run the individual benchmarking methods:
 
 1. Download and install the code and relevant packages from: [E-LSTM-D](https://github.com/jianz94/e-lstm-d)
 2. Download and install the code and relevant packages from: [T-SBM](https://github.com/seeslab/MMmultilayer)
 3. Make sure you have installed the required environment and packages.
 
-First, you have to run the E-LSTM-D codes in order to get the features and AUC scores from it. See System Requirements for how to install the environments correctly. 
+To run the full Ensemble-Sequential experiment, first, you have to run the modified E-LSTM-D codes provided in this repository in order to get the features and AUC scores from it. See System Requirements for how to install the environments correctly. 
 
 ```bash
 $ cd ensemble_with_others/E-LSTM-D/Partially-observed
@@ -171,13 +171,13 @@ $ python calculate_elstmd.py
 $ python generate_output.py
 ```
 
-This will in turn gives you a full feature matrix from E-LSTM-D and a folder named "lstm_feat", which you could used to stack with the topological features extracted with Top-Sequential method. 
+This will in turn gives you a full feature matrix from E-LSTM-D and a folder named "lstm_feat", which you could use to stack with the topological features extracted with Top-Sequential method. 
 
-If you wish to get the AUC scores for E-LSTM-D, stop here. 
+If you wish to get the AUC scores for E-LSTM-D only, stop here. 
 
-If not, please go ahead and copy and paste the folder `lstm_feat` to be under the same directory that you are planning to conduct your full Ensemble-Sequential method. (I intentionally avoid directly put it under that folder to avoid confusion of where does that output folder comes from.)
+Then, please go ahead and copy and paste the folder `lstm_feat` to be under the same directory that you are planning to conduct your full Ensemble-Sequential method. (In the code, I intentionally avoid directly putting it under that folder to avoid confusion about where that output folder comes from.)
 
-After that, navigate towards the folder `ensemble_with_others/Ensemble_final_edition/`, which is also the default folder that you should be pasting to. 
+After that, navigate to the folder `ensemble_with_others/Ensemble_final_edition/`, which is also the default folder that you should be pasting to. 
 
 Once inside the folder you have to first generate the feature matrix for the dataset first. You can do this by:
 
@@ -205,9 +205,9 @@ auc_methods = ['Top-Sequential-Stacking', 'Time-Series', 'Tensorial-SBM', 'E-LST
 
 The AUC scores order that you will get after the completely unobserved case will be the same order, except that you will ignore the third column, `Tensorial-SBM`, because that would be a meaningless result that is repeating the partially observed case.  
 
-Note also: feel free to use this ensemble learning method stacked with other features of your liking. Theoritically any features that could generated with a partially observed network would work with that case, and note also completely unobserved case would require features that could be generated from the previous time slot. 
+Note also: feel free to use this ensemble learning method stacked with other features of your liking. Theoretically, any features that could be generated with a partially observed network would work with that case, and note also that the completely unobserved case would require features that could be generated from the previous time layers. 
 
-**If there's any question, feel free to leave a message on GitHub or email directly.**
+**If there are any questions, feel free to leave a message on GitHub or email directly.**
 
 </div>
 
@@ -216,14 +216,14 @@ Note also: feel free to use this ensemble learning method stacked with other fea
 For E-LSTM-D:
 
 1. Download and install the code and relevant packages from: [E-LSTM-D](https://github.com/jianz94/e-lstm-d)
-2. Either you could then run their code directly to caluclate the AUC.
-3. Or you could directly run the full Ensemble-Sequential code, which automatically generate the AUC scores after the full-run.
+2. Either you could then run their code directly to calculate the AUC.
+3. Or you could directly run the full Ensemble-Sequential code, which automatically generates the AUC scores after the full-run.
 
 For Tensorial-SBM:
 
 1. Download and install the code and relevant packages from: [T-SBM](https://github.com/seeslab/MMmultilayer)
-2. Either you could then run their code directly to caluclate the AUC.
-3. Or you could directly run the full Ensemble-Sequential code, which automatically generate the AUC scores after the full-run.
+2. Either you could then run their code directly to calculate the AUC.
+3. Or you could directly run the full Ensemble-Sequential code, which automatically generates the AUC scores after the full-run.
 
 For Time Series: 
 
@@ -251,7 +251,7 @@ For the naming convention, see the functions in the python file `translate.py` f
 
 <h2 align="center">Real World Datasets </h2>
 
-The real world networks could be found under the following links, due to copy right reasons, we will only show the link to download them:
+The real world networks could be found under the following links. Due to copyright reasons, we will only show the link to download them.
 The following is taken from ICON: https://icon.colorado.edu/#!/networks
 
 - chess: Search for Kaggle chess players (2010) on : https://icon.colorado.edu/#!/networks
@@ -276,7 +276,10 @@ The following is given to us by the authors, special thanks to the authors for s
 
 <h2 align="center">Acknowledgements </h2>
 
-Special thanks to Junyi Chen, Jonathan T. Lindbloom, Lizuo Liu, Ryan Maguire for their help during the progress of this project. 
+
+We thank Marya Bazzi, Lucas Jeub, Roxana Pamfil, and Mason A. Porter for helpful discussions and conversation; and Khalique Newaz and Tijana Milenkovic for providing the bionet datasets. We are grateful for the use of the high performance computing clusters at the University of North Carolina at Chapel Hill (longleaf) and Dartmouth College (discovery7). A special thanks to Junyi Cheng for helping with the graphical design of Figure 1. Special thanks to Jonathan T. Lindbloom, Lizuo Liu, and Ryan Maguire for their help during the progress of this project. This work is supported in part by the Army Research Office under MURI award W911NF-18-1-0244 (X.H. and P.J.M.), the National Science Foundation under Grant No.~2030859 to the Computing Research Association for the CIFellows Project (A.G.), and the National Research Foundation of Korea (NRF) grant funded by the Korea government(MSIT) (No.~RS-2022-00165916) (E.L.). The content is solely the responsibility of the authors and does not necessarily represent the official views of any agency supporting this research.
+
+
 
 </div>
 
